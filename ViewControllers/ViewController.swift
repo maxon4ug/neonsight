@@ -37,16 +37,21 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     // NAV BAR
     
+    @IBOutlet weak var navBarView: UIView!
     @IBOutlet weak var galleryButton: UIButton!
     @IBOutlet weak var lightningButton: UIButton!
     
+    // EDIT NAV BAR
+    
+    @IBOutlet weak var editNabBarView: UIView!
+//    @IBOutlet weak var editNavBarScaleBGView: UIView!
     
     // FILTERS PANEL
     
-    @IBOutlet weak var filtersPanelUIVIew: UIView!
+    @IBOutlet weak var filtersPanelView: UIView!
     @IBOutlet weak var filtersScrollView: UIScrollView!
     @IBOutlet var filtersImageViewCollection: [UIImageView]!
-    @IBOutlet var filtersTextFieldCollection: [UITextField]!
+    @IBOutlet var filtersNameLableCollection: [UILabel]!
     @IBOutlet var filtersButtonCollection: [UIButton]!
     
     
@@ -58,25 +63,72 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         super.viewDidLoad()
     }
     
+    //
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         CameraController.camera.stopCapture()
     }
     
+    //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if AVCaptureDevice.authorizationStatus(for: .video) == .authorized {
-            CameraController.startCameraSession(sender: self)
-        } else {
-            AVCaptureDevice.requestAccess(for: .video, completionHandler: { (authorized) in
-                DispatchQueue.main.async {
-                    if authorized {
-                        CameraController.startCameraSession(sender: self)
-                    }
-                }
-            })
+        setupUI()
+        CameraController.startCameraSession(sender: self)
+    }
+
+    
+    // MARK: - UI
+    
+    func setupUI() {
+//        let editNavBarScaleBGGradient = CAGradientLayer()
+//        editNavBarScaleBGGradient.colors = [UIColor(named: "neonPink")!, UIColor(named: "neonBlue")!]
+//        editNavBarScaleBGView.layer.insertSublayer(editNavBarScaleBGGradient, at: 0)
+    }
+    
+    
+    func switchTab(to tabNum: UInt) {
+        switch tabNum {
+        case 1:
+            if activeTab == 0 {
+                activeTab = 1
+            filtersTabButton.alpha = 1.0
+            filtersPanelView.isHidden = false
+            } else if activeTab == 1 {
+                activeTab = 0
+                filtersTabButton.alpha = 0.3
+                filtersPanelView.isHidden = true
+            } else {
+                activeTab = 1
+                filtersTabButton.alpha = 1.0
+                editTabButton.alpha = 0.3
+                editNabBarView.isHidden = true
+                navBarView.isHidden = false
+                filtersPanelView.isHidden = false
+            }
+        case 2:
+            if activeTab == 1 {
+                activeTab = 2
+                editTabButton.alpha = 1.0
+                filtersTabButton.alpha = 0.3
+                filtersPanelView.isHidden = true
+                editNabBarView.isHidden = false
+                navBarView.isHidden = true
+                //panel.isHidden
+            } else if activeTab == 2 {
+                activeTab = 0
+                navBarView.isHidden = false
+                editTabButton.alpha = 0.3
+                editNabBarView.isHidden = true
+            } else {
+                activeTab = 2
+                editTabButton.alpha = 1.0
+                navBarView.isHidden = true
+                editNabBarView.isHidden = false
+            }
+        default: break
         }
     }
+    
     
     // MARK: - IBActions
     
@@ -84,35 +136,26 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
 //        let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
     }
     
+    //
     @IBAction func filtersTabButtonTapped(_ sender: Any) {
-        switch activeTab {
-        case 0:
-            activeTab = 1
-            filtersTabButton.alpha = 1.0
-            filtersPanelUIVIew.isHidden = false
-        case 1:
-            activeTab = 0
-            filtersTabButton.alpha = 0.3
-            filtersPanelUIVIew.isHidden = true
-        case 2:
-            activeTab = 1
-            filtersTabButton.alpha = 1.0
-            editTabButton.alpha = 0.3
-        //editorsListUIView.isHidden = true
-        default: break
-        }
+        switchTab(to: 1)
     }
     
+    //
     @IBAction func editTabButtonTapped(_ sender: Any) {
+        switchTab(to: 2)
     }
     
+    //
     @IBAction func changeCameraButtonTapped(_ sender: Any) {
         CameraController.camera.location = .frontFacing
     }
     
+    //
     @IBAction func infoTabButtonTapped(_ sender: Any) {
     }
     
+    //
     @IBAction func lightningButtonTapped(_ sender: Any) {
         if lightningMode == 3 {
             lightningMode = 0
@@ -123,9 +166,11 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         }
     }
     
+    //
     @IBAction func galleryButtonTapped(_ sender: Any) {
     }
     
+    //
     @IBAction func filterButtonTapped(_ sender: UIButton) {
         
         switch sender.tag {

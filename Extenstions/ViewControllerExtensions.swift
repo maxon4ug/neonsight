@@ -55,7 +55,7 @@ extension ViewController : AVCaptureVideoDataOutputSampleBufferDelegate {
         //        comicEffect!.setValue(ciImage, forKey: kCIInputImageKey)
         //        let cgImage = self.ciContext.createCGImage(comicEffect!.outputImage!, from: ciImage.extent)!
         let image = UIImage(data: imageData)
-        CameraController.sharePhoto(sender: self, image: image!)
+        IOController.export(image: image!, sender: self)
     }
 }
 

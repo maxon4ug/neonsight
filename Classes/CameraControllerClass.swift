@@ -17,27 +17,36 @@ class CameraController {
     
     static var camera: Camera!
     
+    
+    
+    // MARK: - Methods
+    
     class func startCameraSession(sender: ViewController) {
-        do {
-            CameraController.camera = try Camera(sessionPreset:.high)
-            let filter = ColorInversion()
-            CameraController.camera --> filter --> sender.cameraView
-            CameraController.camera.startCapture()
-        } catch {
-            fatalError("Could not initialize rendering pipeline: \(error)")
+        
+        if AVCaptureDevice.authorizationStatus(for: .video) == .authorized {
+            
+            do {
+                CameraController.camera = try Camera(sessionPreset:.high)
+                let filter = RGBAdjustment()
+                filter.red = 0.0
+                CameraController.camera --> filter --> sender.cameraView
+                CameraController.camera.startCapture()
+            } catch {
+                fatalError("Could not initialize rendering pipeline: \(error)")
+            }
+
+        } else {
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: { (authorized) in
+                DispatchQueue.main.async {
+                    if authorized {
+                        CameraController.startCameraSession(sender: sender)
+                    }
+                }
+            })
         }
+        
     }
     
-    class func sharePhoto(sender: UIViewController, image: UIImage) {
-        
-        let activityViewController = UIActivityViewController(activityItems: [ image ], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = sender.view
-        //        activityViewController.excludedActivityTypes = [ .airDrop ]
-        //        activityViewController.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
-        //
-        //        }
-        sender.present(activityViewController, animated: true, completion: nil)
-    }
 //
 //    static var imageOutput: AVCapturePhotoOutput!
 //    static var previewLayer: AVCaptureVideoPreviewLayer!
