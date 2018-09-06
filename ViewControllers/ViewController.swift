@@ -56,6 +56,11 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     @IBOutlet var filtersButtonCollection: [UIButton]!
     
     
+    // EDIT PANEL 
+    @IBOutlet weak var testLabel: UILabel!
+    @IBOutlet weak var editPanelView: UIView!
+    
+    
     // MARK: - Methods
     
     // MARK: Lifecycle

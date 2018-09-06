@@ -34,6 +34,42 @@
                                     <constraint firstItem="WOj-W0-9SM" firstAttribute="top" secondItem="axp-VX-ui7" secondAttribute="top" id="vEi-UW-zAV"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZEk-nf-7AD" userLabel="Edit Panel">
+                                <rect key="frame" x="62" y="161" width="250" height="500"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="arrowUp" translatesAutoresizingMaskIntoConstraints="NO" id="4DF-Qh-wWr">
+                                        <rect key="frame" x="119" y="9" width="12" height="6"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="6" id="Ely-Bw-DC7"/>
+                                            <constraint firstAttribute="width" constant="12" id="euu-nj-MKO"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="arrowDown" translatesAutoresizingMaskIntoConstraints="NO" id="XTd-rh-1ia">
+                                        <rect key="frame" x="119" y="485" width="12" height="6"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="6" id="nj7-iH-XOI"/>
+                                            <constraint firstAttribute="width" constant="12" id="vnc-tA-P6f"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4E-7W-62h">
+                                        <rect key="frame" x="34" y="239.33333333333331" width="41.666666666666657" height="20.333333333333314"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="G4E-7W-62h" firstAttribute="leading" secondItem="ZEk-nf-7AD" secondAttribute="leading" constant="34" id="1cF-7Y-4fV"/>
+                                    <constraint firstAttribute="width" constant="250" id="9ej-DH-AI4"/>
+                                    <constraint firstItem="4DF-Qh-wWr" firstAttribute="top" secondItem="ZEk-nf-7AD" secondAttribute="top" constant="9" id="C4a-4i-QL2"/>
+                                    <constraint firstItem="G4E-7W-62h" firstAttribute="centerY" secondItem="ZEk-nf-7AD" secondAttribute="centerY" id="Dis-A5-4xu"/>
+                                    <constraint firstItem="4DF-Qh-wWr" firstAttribute="centerX" secondItem="ZEk-nf-7AD" secondAttribute="centerX" id="Jhf-z2-MiP"/>
+                                    <constraint firstAttribute="bottom" secondItem="XTd-rh-1ia" secondAttribute="bottom" constant="9" id="PfN-nN-YIp"/>
+                                    <constraint firstAttribute="height" constant="500" id="gVh-qD-q3U"/>
+                                    <constraint firstItem="XTd-rh-1ia" firstAttribute="centerX" secondItem="ZEk-nf-7AD" secondAttribute="centerX" id="vtO-xt-zXu"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZNG-nr-tB1" userLabel="Tab Bar">
                                 <rect key="frame" x="0.0" y="692" width="375" height="86"/>
                                 <subviews>
@@ -749,14 +785,6 @@
                                     <constraint firstAttribute="height" constant="105" id="rSK-wB-ZRx"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.80000000000000004" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZEk-nf-7AD" userLabel="Edit Panel">
-                                <rect key="frame" x="57" y="207" width="250" height="343"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="9ej-DH-AI4"/>
-                                    <constraint firstAttribute="height" constant="370" id="gVh-qD-q3U"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -785,6 +813,7 @@
                         <outlet property="changeCameraButton" destination="haw-3z-hJI" id="g4Q-Ig-7ZX"/>
                         <outlet property="editNabBarView" destination="KEl-6k-UIq" id="iS8-Ql-bxv"/>
                         <outlet property="editNavBarLabel" destination="pIO-WA-COr" id="Lqv-MR-s1I"/>
+                        <outlet property="editPanelView" destination="ZEk-nf-7AD" id="y4t-Os-E8N"/>
                         <outlet property="editTabButton" destination="fu8-AE-kbl" id="V4c-74-9ld"/>
                         <outlet property="filtersPanelView" destination="DsW-g9-GMm" id="Neb-gF-krf"/>
                         <outlet property="filtersScrollView" destination="27k-dh-GgM" id="A30-YY-nJ6"/>
@@ -794,6 +823,7 @@
                         <outlet property="lightningButton" destination="EJp-0h-MpY" id="bRU-pX-Oc1"/>
                         <outlet property="navBarView" destination="P8r-2j-kVR" id="Cxe-Bp-sSl"/>
                         <outlet property="photoButton" destination="bqr-i3-2aa" id="LAL-SJ-D8X"/>
+                        <outlet property="testLabel" destination="G4E-7W-62h" id="7co-EO-gzR"/>
                         <outletCollection property="filtersImageViewCollection" destination="3Er-KZ-7Cf" collectionClass="NSMutableArray" id="kkx-zm-dTc"/>
                         <outletCollection property="filtersImageViewCollection" destination="ybn-hX-hDT" collectionClass="NSMutableArray" id="43S-yh-daO"/>
                         <outletCollection property="filtersImageViewCollection" destination="uLL-Xw-B43" collectionClass="NSMutableArray" id="P75-LD-j34"/>
@@ -832,6 +862,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrowDown" width="24" height="12"/>
+        <image name="arrowUp" width="24" height="12"/>
         <image name="edit" width="20" height="20"/>
         <image name="filters" width="19" height="20"/>
         <image name="frontalCam" width="26" height="20"/>

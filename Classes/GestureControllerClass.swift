@@ -14,12 +14,14 @@ class GestureController {
     
     static var viewController: ViewController!
     
-    static var startX = CGFloat(0.0)
-    static var startY = CGFloat(0.0)
+    static var startX: CGFloat!
+    static var startY: CGFloat!
     static var gestureDemention = 0 // 1 - horizontal, 2 - vertical
-    static var lastX = UIScreen.main.bounds.width / 2.0
-    static var changeValue = 0
+    static var lastX: CGFloat!
+    static var lastY: CGFloat!
+    static var changeValue: Int!
     static var setValue = 0
+    static var setValueY = CGFloat(0.0)
     static let step = UIScreen.main.bounds.width / 120.0
     static var editName = "Exposure"
     static let maxValue = 100
@@ -28,7 +30,7 @@ class GestureController {
     // MARK: - Methods
     
     class func setupGestureRecognizer(sender: ViewController) {
-        GestureController.viewController = sender
+        viewController = sender
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         longPress.delaysTouchesBegan = true
         longPress.minimumPressDuration = 0.0
@@ -40,67 +42,79 @@ class GestureController {
     //
     @objc class func handleLongPress(gesture: UILongPressGestureRecognizer) {
         if gesture.state == UIGestureRecognizerState.began {
-            GestureController.startX = gesture.location(in: viewController.cameraView).x
-            GestureController.startY = gesture.location(in: viewController.cameraView).y
-            GestureController.lastX = gesture.location(in: viewController.cameraView).x
+            startX = gesture.location(in: viewController.cameraView).x
+            startY = gesture.location(in: viewController.cameraView).y
+            lastX = gesture.location(in: viewController.cameraView).x
         } else if gesture.state == UIGestureRecognizerState.changed {
             let location = gesture.location(in: viewController.cameraView)
-            if GestureController.gestureDemention == 0 {
-                if abs(Int32(GestureController.startX - location.x)) > abs(Int32(GestureController.startY - location.y)) {
-                    GestureController.gestureDemention = 1 //horizontal
+            if gestureDemention == 0 {
+                if abs(Int32(startX - location.x)) > abs(Int32(startY - location.y)) {
+                    gestureDemention = 1 //horizontal
                 } else {
-                    GestureController.gestureDemention = 2 //vertical
+                    gestureDemention = 2 //vertical
                 }
-            } else if GestureController.gestureDemention == 1 {
+            } else if gestureDemention == 1 {
                 //horizontal
-                let shift = (location.x - GestureController.startX)
-                GestureController.changeValue = GestureController.getChangeValue(shift: shift, maxValue: maxValue, minValue: minValue)
-                var currentValue = GestureController.changeValue + GestureController.setValue
-                if currentValue >= GestureController.maxValue {
-                    currentValue = GestureController.maxValue
-                    GestureController.changeValue = 0
-                    GestureController.setValue = GestureController.maxValue
-                    if location.x > GestureController.lastX {
-                        GestureController.lastX = location.x
-                        GestureController.startX = location.x
+                let shift = (location.x - startX)
+                changeValue = getChangeValue(shift: shift, maxValue: maxValue, minValue: minValue)
+                var currentValue = changeValue + setValue
+                if currentValue >= maxValue {
+                    currentValue = maxValue
+                    changeValue = 0
+                    setValue = maxValue
+                    if location.x > lastX {
+                        lastX = location.x
+                        startX = location.x
                     }
-                } else if currentValue <= GestureController.minValue {
-                    currentValue = GestureController.minValue
-                    GestureController.changeValue = 0
-                    GestureController.setValue = minValue
-                    if location.x < GestureController.lastX {
-                        GestureController.lastX = location.x
-                        GestureController.startX = location.x
+                } else if currentValue <= minValue {
+                    currentValue = minValue
+                    changeValue = 0
+                    setValue = minValue
+                    if location.x < lastX {
+                        lastX = location.x
+                        startX = location.x
                     }
                 }
                 
-                GestureController.viewController.editNavBarLabel.text = "\(currentValue > 0 ? GestureController.editName + " +" : GestureController.editName + " ")\(currentValue)"
+                viewController.editNavBarLabel.text = "\(currentValue > 0 ? editName + " +" : editName + " ")\(currentValue)"
                 
             } else {
                 //vertical
+                viewController.editNabBarView.isHidden = true
+                viewController.editPanelView.isHidden = false
+                let shift = (location.y - startY)
+                //                changeValue = getChangeValue(shift: shift, maxValue: maxValue, minValue: minValue)
+                viewController.editPanelView.frame = CGRect(x: (UIScreen.main.bounds.width - viewController.editPanelView.bounds.width) / 2.0, y: viewController.editPanelView.bounds.minY + shift, width: viewController.editPanelView.frame.width, height: viewController.editPanelView.frame.height)
                 
             }
         }
         else {
-            let shift = (gesture.location(in: viewController.cameraView).x - GestureController.startX)
-            GestureController.setValue += GestureController.getChangeValue(shift: shift, maxValue: 100, minValue: 100)
-            GestureController.gestureDemention = 0
-            if GestureController.setValue >= GestureController.maxValue {
-                GestureController.lastX = 0.0
+            if gestureDemention == 1 {
+                let shift = (gesture.location(in: viewController.cameraView).x - startX)
+                setValue += getChangeValue(shift: shift, maxValue: 100, minValue: 100)
+                if setValue >= maxValue {
+                    lastX = 0.0
+                } else {
+                    lastX = UIScreen.main.bounds.width
+                }
             } else {
-                GestureController.lastX = UIScreen.main.bounds.width
+                //vertical
+                viewController.editNabBarView.isHidden = false
+                viewController.editPanelView.isHidden = true
             }
+            gestureDemention = 0
         }
     }
     
     
     class func getChangeValue(shift: CGFloat, maxValue: Int, minValue: Int) -> Int {
-        let percentage = (shift / GestureController.step)
+        let percentage = (shift / step)
         let value = CGFloat(maxValue) / 100 * percentage
         return Int(value)
     }
     
 }
+
 
 
 
