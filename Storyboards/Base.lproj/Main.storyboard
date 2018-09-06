@@ -165,8 +165,8 @@
                             <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KEl-6k-UIq" userLabel="Edit Nav Bar">
                                 <rect key="frame" x="0.0" y="44" width="375" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Экспозиция +12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pIO-WA-COr">
-                                        <rect key="frame" x="130" y="22.666666666666671" width="115" height="17.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exposure" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pIO-WA-COr">
+                                        <rect key="frame" x="155.66666666666666" y="22.666666666666671" width="63.666666666666657" height="17.333333333333329"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -749,6 +749,14 @@
                                     <constraint firstAttribute="height" constant="105" id="rSK-wB-ZRx"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZEk-nf-7AD" userLabel="Edit Panel">
+                                <rect key="frame" x="57" y="207" width="250" height="343"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="9ej-DH-AI4"/>
+                                    <constraint firstAttribute="height" constant="370" id="gVh-qD-q3U"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -776,6 +784,7 @@
                         <outlet property="cameraView" destination="axp-VX-ui7" id="w8b-G8-7Z8"/>
                         <outlet property="changeCameraButton" destination="haw-3z-hJI" id="g4Q-Ig-7ZX"/>
                         <outlet property="editNabBarView" destination="KEl-6k-UIq" id="iS8-Ql-bxv"/>
+                        <outlet property="editNavBarLabel" destination="pIO-WA-COr" id="Lqv-MR-s1I"/>
                         <outlet property="editTabButton" destination="fu8-AE-kbl" id="V4c-74-9ld"/>
                         <outlet property="filtersPanelView" destination="DsW-g9-GMm" id="Neb-gF-krf"/>
                         <outlet property="filtersScrollView" destination="27k-dh-GgM" id="A30-YY-nJ6"/>
@@ -819,7 +828,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="31.884057971014496" y="33.423913043478265"/>
+            <point key="canvasLocation" x="31.199999999999999" y="33.251231527093594"/>
         </scene>
     </scenes>
     <resources>

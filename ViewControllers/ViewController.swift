@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import GPUImage
 
-class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, AVCapturePhotoCaptureDelegate {
+class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, AVCapturePhotoCaptureDelegate, UIGestureRecognizerDelegate {
     
     // MARK: - Properties
     
@@ -45,6 +45,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     @IBOutlet weak var editNabBarView: UIView!
 //    @IBOutlet weak var editNavBarScaleBGView: UIView!
+    @IBOutlet weak var editNavBarLabel: UILabel!
     
     // FILTERS PANEL
     
@@ -83,9 +84,10 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
 //        let editNavBarScaleBGGradient = CAGradientLayer()
 //        editNavBarScaleBGGradient.colors = [UIColor(named: "neonPink")!, UIColor(named: "neonBlue")!]
 //        editNavBarScaleBGView.layer.insertSublayer(editNavBarScaleBGGradient, at: 0)
+        GestureController.setupGestureRecognizer(sender: self)
     }
     
-    
+    //
     func switchTab(to tabNum: UInt) {
         switch tabNum {
         case 1:
