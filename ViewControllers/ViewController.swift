@@ -81,104 +81,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupUI()
+        UIController.setupUI(sender: self)
         CameraController.startCameraSession(sender: self)
-    }
-    
-    
-    // MARK: - UI
-    
-    func setupUI() {
-        //        let editNavBarScaleBGGradient = CAGradientLayer()
-        //        editNavBarScaleBGGradient.colors = [UIColor(named: "neonPink")!, UIColor(named: "neonBlue")!]
-        //        editNavBarScaleBGView.layer.insertSublayer(editNavBarScaleBGGradient, at: 0)
-        editNavBarLabelBGView.layer.cornerRadius = editNavBarLabelBGView.frame.height / 2.0
-        galleryPanelView.subviews.first!.layer.cornerRadius = galleryPanelView.frame.height / 2.0
-        lightningPanelView.subviews.first!.layer.cornerRadius = lightningPanelView.frame.height / 2.0
-        GestureController.setupGestureRecognizer(sender: self)
-    }
-    
-    //
-    func moveView(view: UIView, x: CGFloat, y: CGFloat, isHidden: Bool, completion: @escaping () -> () = {}) {
-        if isHidden == false {
-            view.isHidden = isHidden
-        }
-        let originalTransform = view.transform
-        let scaledTransform = originalTransform.scaledBy(x: 1, y: 1)
-        let scaledAndTranslatedTransform = scaledTransform.translatedBy(x: x, y: y)
-        UIView.animate(withDuration: 0.2, animations: {
-            view.transform = scaledAndTranslatedTransform
-        }, completion: { (finished) in
-            view.isHidden = isHidden
-            completion()
-        })
-    }
-    
-    //
-    func switchTab(to tabNum: UInt) {
-        switch tabNum {
-        case 1:
-            if activeTab == 0 {
-                activeTab = 1
-                filtersTabButton.alpha = 1.0
-                moveView(view: filtersPanelView, x: 0.0, y: -(filtersPanelView.frame.height), isHidden: false)
-            } else if activeTab == 1 {
-                activeTab = 0
-                filtersTabButton.alpha = 0.3
-                moveView(view: filtersPanelView, x: 0.0, y: filtersPanelView.frame.height, isHidden: true)
-            } else {
-                activeTab = 1
-                filtersTabButton.alpha = 1.0
-                editTabButton.alpha = 0.3
-                
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.editNabBarView.alpha = 0.0
-                }) { (finished) in
-                    self.editNabBarView.isHidden = true
-                }
-                moveView(view: lightningPanelView, x: lightningPanelView.frame.width - 22.0, y: 0.0, isHidden: false)
-                moveView(view: galleryPanelView, x: -(galleryPanelView.frame.width - 22.0), y: 0.0, isHidden: false)
-                moveView(view: filtersPanelView, x: 0.0, y: -(filtersPanelView.frame.height), isHidden: false)
-            }
-        case 2:
-            if activeTab == 1 {
-                activeTab = 2
-                editTabButton.alpha = 1.0
-                filtersTabButton.alpha = 0.3
-                filtersPanelView.isHidden = true
-                moveView(view: filtersPanelView, x: 0.0, y: filtersPanelView.frame.height, isHidden: true)
-                moveView(view: lightningPanelView, x: -(lightningPanelView.frame.width - 22.0), y: 0.0, isHidden: true)
-                moveView(view: galleryPanelView, x: galleryPanelView.frame.width - 22.0, y: 0.0, isHidden: true)
-                editNabBarView.alpha = 0.0
-                editNabBarView.isHidden = false
-                UIView.animate(withDuration: 0.2) {
-                    self.editNabBarView.alpha = 1.0
-                }
-                //panel.isHidden
-            } else if activeTab == 2 {
-                activeTab = 0
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.editNabBarView.alpha = 0.0
-                }) { (finished) in
-                    self.editNabBarView.isHidden = true
-                }
-                moveView(view: lightningPanelView, x: lightningPanelView.frame.width - 22.0, y: 0.0, isHidden: false)
-                moveView(view: galleryPanelView, x: -(galleryPanelView.frame.width - 22.0), y: 0.0, isHidden: false)
-                editTabButton.alpha = 0.3
-            } else {
-                activeTab = 2
-                editTabButton.alpha = 1.0
-                moveView(view: lightningPanelView, x: -(lightningPanelView.frame.width - 22.0), y: 0.0, isHidden: true)
-                moveView(view: galleryPanelView, x: galleryPanelView.frame.width - 22.0, y: 0.0, isHidden: true)
-                
-                editNabBarView.alpha = 0.0
-                editNabBarView.isHidden = false
-                UIView.animate(withDuration: 0.2) {
-                    self.editNabBarView.alpha = 1.0
-                }
-            }
-        default: break
-        }
     }
     
     
@@ -190,12 +94,12 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     //
     @IBAction func filtersTabButtonTapped(_ sender: Any) {
-        switchTab(to: 1)
+        UIController.switchTab(to: 1)
     }
     
     //
     @IBAction func editTabButtonTapped(_ sender: Any) {
-        switchTab(to: 2)
+        UIController.switchTab(to: 2)
     }
     
     //
