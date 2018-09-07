@@ -38,9 +38,10 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     // NAV BAR
     
-    @IBOutlet weak var navBarView: UIView!
     @IBOutlet weak var galleryButton: UIButton!
     @IBOutlet weak var lightningButton: UIButton!
+    @IBOutlet weak var lightningPanelView: UIView!
+    @IBOutlet weak var galleryPanelView: UIView!
     
     // EDIT NAV BAR
     
@@ -92,6 +93,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         //        editNavBarScaleBGGradient.colors = [UIColor(named: "neonPink")!, UIColor(named: "neonBlue")!]
         //        editNavBarScaleBGView.layer.insertSublayer(editNavBarScaleBGGradient, at: 0)
         editNavBarLabelBGView.layer.cornerRadius = editNavBarLabelBGView.frame.height / 2.0
+        galleryPanelView.subviews.first!.layer.cornerRadius = galleryPanelView.frame.height / 2.0
+        lightningPanelView.subviews.first!.layer.cornerRadius = lightningPanelView.frame.height / 2.0
         GestureController.setupGestureRecognizer(sender: self)
     }
     
@@ -127,8 +130,14 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                 activeTab = 1
                 filtersTabButton.alpha = 1.0
                 editTabButton.alpha = 0.3
-                editNabBarView.isHidden = true
-                navBarView.isHidden = false
+                
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.editNabBarView.alpha = 0.0
+                }) { (finished) in
+                    self.editNabBarView.isHidden = true
+                }
+                moveView(view: lightningPanelView, x: lightningPanelView.frame.width - 22.0, y: 0.0, isHidden: false)
+                moveView(view: galleryPanelView, x: -(galleryPanelView.frame.width - 22.0), y: 0.0, isHidden: false)
                 moveView(view: filtersPanelView, x: 0.0, y: -(filtersPanelView.frame.height), isHidden: false)
             }
         case 2:
@@ -138,19 +147,35 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                 filtersTabButton.alpha = 0.3
                 filtersPanelView.isHidden = true
                 moveView(view: filtersPanelView, x: 0.0, y: filtersPanelView.frame.height, isHidden: true)
-                navBarView.isHidden = true
+                moveView(view: lightningPanelView, x: -(lightningPanelView.frame.width - 22.0), y: 0.0, isHidden: true)
+                moveView(view: galleryPanelView, x: galleryPanelView.frame.width - 22.0, y: 0.0, isHidden: true)
+                editNabBarView.alpha = 0.0
                 editNabBarView.isHidden = false
+                UIView.animate(withDuration: 0.2) {
+                    self.editNabBarView.alpha = 1.0
+                }
                 //panel.isHidden
             } else if activeTab == 2 {
                 activeTab = 0
-                editNabBarView.isHidden = true
-                navBarView.isHidden = false
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.editNabBarView.alpha = 0.0
+                }) { (finished) in
+                    self.editNabBarView.isHidden = true
+                }
+                moveView(view: lightningPanelView, x: lightningPanelView.frame.width - 22.0, y: 0.0, isHidden: false)
+                moveView(view: galleryPanelView, x: -(galleryPanelView.frame.width - 22.0), y: 0.0, isHidden: false)
                 editTabButton.alpha = 0.3
             } else {
                 activeTab = 2
                 editTabButton.alpha = 1.0
-                navBarView.isHidden = true
+                moveView(view: lightningPanelView, x: -(lightningPanelView.frame.width - 22.0), y: 0.0, isHidden: true)
+                moveView(view: galleryPanelView, x: galleryPanelView.frame.width - 22.0, y: 0.0, isHidden: true)
+                
+                editNabBarView.alpha = 0.0
                 editNabBarView.isHidden = false
+                UIView.animate(withDuration: 0.2) {
+                    self.editNabBarView.alpha = 1.0
+                }
             }
         default: break
         }

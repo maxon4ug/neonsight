@@ -28,7 +28,6 @@ class CameraController {
             do {
                 CameraController.camera = try Camera(sessionPreset:.high)
                 let filter = RGBAdjustment()
-                filter.red = 0.0
                 CameraController.camera --> filter --> sender.cameraView
                 CameraController.camera.startCapture()
             } catch {
