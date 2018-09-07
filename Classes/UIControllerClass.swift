@@ -10,8 +10,15 @@ import UIKit
 
 class UIController {
     
+    // MARK: - Properties
+    
     static var viewController: ViewController!
     static var activeTab = 1
+    static var lightningMode = 0
+    static var lightningModesList = ["lightningOff","lightningA","lightning","lightningT"]
+    
+    
+    // MARK: - Methods
     
     class func setupUI(sender: ViewController) {
         UIController.viewController = sender
@@ -21,8 +28,9 @@ class UIController {
         UIController.viewController.editNavBarLabelBGView.layer.cornerRadius = UIController.viewController.editNavBarLabelBGView.frame.height / 2.0
         UIController.viewController.galleryPanelView.subviews.first!.layer.cornerRadius = UIController.viewController.galleryPanelView.frame.height / 2.0
         UIController.viewController.lightningPanelView.subviews.first!.layer.cornerRadius = UIController.viewController.lightningPanelView.frame.height / 2.0
-        GestureController.setupGestureRecognizer(sender: UIController.viewController)
+        GestureController.setupGestureRecognizer(sender: sender)
     }
+    
     
     //
     class func moveView(view: UIView, x: CGFloat, y: CGFloat, isHidden: Bool, completion: @escaping () -> () = {}) {
@@ -39,6 +47,7 @@ class UIController {
             completion()
         })
     }
+    
     
     //
     class func switchTab(to tabNum: UInt) {
@@ -104,6 +113,17 @@ class UIController {
                 }
             }
         default: break
+        }
+    }
+    
+    //
+    class func switchLightningMode() {
+        if lightningMode == 3 {
+            lightningMode = 0
+            UIController.viewController.lightningButton.setImage(UIImage(named: lightningModesList[lightningMode]), for: .normal)
+        } else {
+            lightningMode += 1
+            UIController.viewController.lightningButton.setImage(UIImage(named: lightningModesList[lightningMode]), for: .normal)
         }
     }
     

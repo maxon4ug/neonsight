@@ -997,7 +997,7 @@
         <image name="filters" width="19" height="20"/>
         <image name="frontalCam" width="26" height="20"/>
         <image name="gallery" width="20" height="20"/>
-        <image name="lightningOff" width="16" height="22"/>
+        <image name="lightningOff" width="17" height="22"/>
         <image name="moreInfo" width="20" height="15"/>
         <image name="photoButton" width="68" height="68"/>
     </resources>

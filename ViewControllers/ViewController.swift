@@ -18,17 +18,12 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         return true
     }
     
-    var activeTab = 1
-    var lightningMode = 0
-    var lightningModesList = ["lightningOff","lightningA","lightning","lightningT"]
-    
     // MARK: IBOutlets
     
     @IBOutlet weak var cameraView: RenderView!
     @IBOutlet weak var cameraImageView: UIImageView!
     
     // TAB BAR
-    
     @IBOutlet weak var tabBarView: UIView!
     @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var filtersTabButton: UIButton!
@@ -37,27 +32,23 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     @IBOutlet weak var infoTabButton: UIButton!
     
     // NAV BAR
-    
     @IBOutlet weak var galleryButton: UIButton!
     @IBOutlet weak var lightningButton: UIButton!
     @IBOutlet weak var lightningPanelView: UIView!
     @IBOutlet weak var galleryPanelView: UIView!
     
     // EDIT NAV BAR
-    
     @IBOutlet weak var editNabBarView: UIView!
     //    @IBOutlet weak var editNavBarScaleBGView: UIView!
     @IBOutlet weak var editNavBarLabel: UILabel!
     @IBOutlet weak var editNavBarLabelBGView: UIView!
     
     // FILTERS PANEL
-    
     @IBOutlet weak var filtersPanelView: UIView!
     @IBOutlet weak var filtersScrollView: UIScrollView!
     @IBOutlet var filtersImageViewCollection: [UIImageView]!
     @IBOutlet var filtersNameLableCollection: [UILabel]!
     @IBOutlet var filtersButtonCollection: [UIButton]!
-    
     
     // EDIT PANEL
     @IBOutlet weak var testLabel: UILabel!
@@ -73,16 +64,16 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     }
     
     //
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        CameraController.camera.stopCapture()
-    }
-    
-    //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIController.setupUI(sender: self)
         CameraController.startCameraSession(sender: self)
+    }
+    
+    //
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        CameraController.camera.stopCapture()
     }
     
     
@@ -113,13 +104,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     //
     @IBAction func lightningButtonTapped(_ sender: Any) {
-        if lightningMode == 3 {
-            lightningMode = 0
-            lightningButton.setImage(UIImage(named: lightningModesList[lightningMode]), for: .normal)
-        } else {
-            lightningMode += 1
-            lightningButton.setImage(UIImage(named: lightningModesList[lightningMode]), for: .normal)
-        }
+        UIController.switchLightningMode()
     }
     
     //

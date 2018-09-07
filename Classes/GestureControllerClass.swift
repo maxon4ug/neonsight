@@ -41,7 +41,7 @@ class GestureController {
     
     //
     @objc class func handleLongPress(gesture: UILongPressGestureRecognizer) {
-        guard viewController.activeTab == 2 else {
+        guard UIController.activeTab == 2 else {
             return
         }
         if gesture.state == UIGestureRecognizerState.began {
