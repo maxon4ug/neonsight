@@ -34,7 +34,7 @@
                                     <constraint firstItem="WOj-W0-9SM" firstAttribute="top" secondItem="axp-VX-ui7" secondAttribute="top" id="vEi-UW-zAV"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P8r-2j-kVR" userLabel="Nav Bar">
+                            <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P8r-2j-kVR" userLabel="Lightnin">
                                 <rect key="frame" x="0.0" y="44" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJp-0h-MpY" userLabel="Lightning Btn">
@@ -70,7 +70,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KEl-6k-UIq" userLabel="Edit Nav Bar">
-                                <rect key="frame" x="0.0" y="-6" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="50"/>
                                 <subviews>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykU-k2-9aM">
                                         <rect key="frame" x="125.66666666666666" y="19" width="123.66666666666666" height="35"/>
@@ -130,7 +130,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DsW-g9-GMm" userLabel="Filters Panel">
                                 <rect key="frame" x="0.0" y="587" width="375" height="105"/>
                                 <subviews>
-                                    <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bt-I0-mv9" userLabel="Background">
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bt-I0-mv9" userLabel="Background">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -888,7 +888,7 @@
                         <constraints>
                             <constraint firstItem="axp-VX-ui7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="2xs-iq-UfL"/>
                             <constraint firstItem="DsW-g9-GMm" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Akr-i2-pDC"/>
-                            <constraint firstItem="KEl-6k-UIq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-50" id="BUz-bf-3WH"/>
+                            <constraint firstItem="KEl-6k-UIq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="BUz-bf-3WH"/>
                             <constraint firstItem="P8r-2j-kVR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DPE-kd-Afo"/>
                             <constraint firstItem="ZEk-nf-7AD" firstAttribute="centerX" secondItem="DsW-g9-GMm" secondAttribute="centerX" id="Ph7-vM-KBW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="axp-VX-ui7" secondAttribute="bottom" constant="50" id="QTt-BE-aNk"/>

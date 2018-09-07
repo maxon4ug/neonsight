@@ -99,9 +99,6 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     func moveView(view: UIView, x: CGFloat, y: CGFloat, isHidden: Bool, completion: @escaping () -> () = {}) {
         if isHidden == false {
             view.isHidden = isHidden
-            if view.layer.position.y == 0.0 {
-                view.layer.position.y = view.layer.position.y - view.frame.height
-            }
         }
         let originalTransform = view.transform
         let scaledTransform = originalTransform.scaledBy(x: 1, y: 1)
@@ -130,33 +127,30 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                 activeTab = 1
                 filtersTabButton.alpha = 1.0
                 editTabButton.alpha = 0.3
-                moveView(view: editNabBarView, x: 0.0, y: -(editNabBarView.frame.height), isHidden: true, completion: {
-                    self.moveView(view: self.navBarView, x: 0.0, y: self.navBarView.frame.height, isHidden: false)
-                    self.moveView(view: self.filtersPanelView, x: 0.0, y: -(self.filtersPanelView.frame.height), isHidden: false)
-                })
+                editNabBarView.isHidden = true
+                navBarView.isHidden = false
+                moveView(view: filtersPanelView, x: 0.0, y: -(filtersPanelView.frame.height), isHidden: false)
             }
         case 2:
             if activeTab == 1 {
                 activeTab = 2
                 editTabButton.alpha = 1.0
                 filtersTabButton.alpha = 0.3
+                filtersPanelView.isHidden = true
                 moveView(view: filtersPanelView, x: 0.0, y: filtersPanelView.frame.height, isHidden: true)
-                moveView(view: navBarView, x: 0.0, y: -(navBarView.frame.height), isHidden: true, completion: {
-                    self.moveView(view: self.editNabBarView, x: 0.0, y: self.editNabBarView.frame.height, isHidden: false)
-                })
+                navBarView.isHidden = true
+                editNabBarView.isHidden = false
                 //panel.isHidden
             } else if activeTab == 2 {
                 activeTab = 0
-                moveView(view: editNabBarView, x: 0.0, y: -(editNabBarView.frame.height), isHidden: true, completion: {
-                    self.moveView(view: self.navBarView, x: 0.0, y: self.navBarView.frame.height, isHidden: false)
-                })
+                editNabBarView.isHidden = true
+                navBarView.isHidden = false
                 editTabButton.alpha = 0.3
             } else {
                 activeTab = 2
                 editTabButton.alpha = 1.0
-                moveView(view: navBarView, x: 0.0, y: -(navBarView.frame.height), isHidden: true, completion: {
-                    self.moveView(view: self.editNabBarView, x: 0.0, y: self.editNabBarView.frame.height, isHidden: false)
-                })
+                navBarView.isHidden = true
+                editNabBarView.isHidden = false
             }
         default: break
         }
