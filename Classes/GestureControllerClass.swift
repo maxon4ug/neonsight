@@ -41,6 +41,9 @@ class GestureController {
     
     //
     @objc class func handleLongPress(gesture: UILongPressGestureRecognizer) {
+        guard viewController.activeTab == 2 else {
+            return
+        }
         if gesture.state == UIGestureRecognizerState.began {
             startX = gesture.location(in: viewController.cameraView).x
             startY = gesture.location(in: viewController.cameraView).y
@@ -84,7 +87,7 @@ class GestureController {
                 viewController.editPanelView.isHidden = false
                 let shift = (location.y - startY)
                 //                changeValue = getChangeValue(shift: shift, maxValue: maxValue, minValue: minValue)
-                viewController.editPanelView.frame = CGRect(x: (UIScreen.main.bounds.width - viewController.editPanelView.bounds.width) / 2.0, y: viewController.editPanelView.bounds.minY + shift, width: viewController.editPanelView.frame.width, height: viewController.editPanelView.frame.height)
+                viewController.editPanelView.frame = CGRect(x: (UIScreen.main.bounds.width - viewController.editPanelView.frame.width) / 2.0, y: viewController.editPanelView.layer.position.y + shift, width: viewController.editPanelView.frame.width, height: viewController.editPanelView.frame.height)
                 
             }
         }

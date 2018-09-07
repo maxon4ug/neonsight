@@ -29,6 +29,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     // TAB BAR
     
+    @IBOutlet weak var tabBarView: UIView!
     @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var filtersTabButton: UIButton!
     @IBOutlet weak var editTabButton: UIButton!
@@ -44,8 +45,9 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     // EDIT NAV BAR
     
     @IBOutlet weak var editNabBarView: UIView!
-//    @IBOutlet weak var editNavBarScaleBGView: UIView!
+    //    @IBOutlet weak var editNavBarScaleBGView: UIView!
     @IBOutlet weak var editNavBarLabel: UILabel!
+    @IBOutlet weak var editNavBarLabelBGView: UIView!
     
     // FILTERS PANEL
     
@@ -56,7 +58,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     @IBOutlet var filtersButtonCollection: [UIButton]!
     
     
-    // EDIT PANEL 
+    // EDIT PANEL
     @IBOutlet weak var testLabel: UILabel!
     @IBOutlet weak var editPanelView: UIView!
     
@@ -81,15 +83,35 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         setupUI()
         CameraController.startCameraSession(sender: self)
     }
-
+    
     
     // MARK: - UI
     
     func setupUI() {
-//        let editNavBarScaleBGGradient = CAGradientLayer()
-//        editNavBarScaleBGGradient.colors = [UIColor(named: "neonPink")!, UIColor(named: "neonBlue")!]
-//        editNavBarScaleBGView.layer.insertSublayer(editNavBarScaleBGGradient, at: 0)
+        //        let editNavBarScaleBGGradient = CAGradientLayer()
+        //        editNavBarScaleBGGradient.colors = [UIColor(named: "neonPink")!, UIColor(named: "neonBlue")!]
+        //        editNavBarScaleBGView.layer.insertSublayer(editNavBarScaleBGGradient, at: 0)
+        editNavBarLabelBGView.layer.cornerRadius = editNavBarLabelBGView.frame.height / 2.0
         GestureController.setupGestureRecognizer(sender: self)
+    }
+    
+    //
+    func moveView(view: UIView, x: CGFloat, y: CGFloat, isHidden: Bool, completion: @escaping () -> () = {}) {
+        if isHidden == false {
+            view.isHidden = isHidden
+            if view.layer.position.y == 0.0 {
+                view.layer.position.y = view.layer.position.y - view.frame.height
+            }
+        }
+        let originalTransform = view.transform
+        let scaledTransform = originalTransform.scaledBy(x: 1, y: 1)
+        let scaledAndTranslatedTransform = scaledTransform.translatedBy(x: x, y: y)
+        UIView.animate(withDuration: 0.2, animations: {
+            view.transform = scaledAndTranslatedTransform
+        }, completion: { (finished) in
+            view.isHidden = isHidden
+            completion()
+        })
     }
     
     //
@@ -98,39 +120,43 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         case 1:
             if activeTab == 0 {
                 activeTab = 1
-            filtersTabButton.alpha = 1.0
-            filtersPanelView.isHidden = false
+                filtersTabButton.alpha = 1.0
+                moveView(view: filtersPanelView, x: 0.0, y: -(filtersPanelView.frame.height), isHidden: false)
             } else if activeTab == 1 {
                 activeTab = 0
                 filtersTabButton.alpha = 0.3
-                filtersPanelView.isHidden = true
+                moveView(view: filtersPanelView, x: 0.0, y: filtersPanelView.frame.height, isHidden: true)
             } else {
                 activeTab = 1
                 filtersTabButton.alpha = 1.0
                 editTabButton.alpha = 0.3
-                editNabBarView.isHidden = true
-                navBarView.isHidden = false
-                filtersPanelView.isHidden = false
+                moveView(view: editNabBarView, x: 0.0, y: -(editNabBarView.frame.height), isHidden: true, completion: {
+                    self.moveView(view: self.navBarView, x: 0.0, y: self.navBarView.frame.height, isHidden: false)
+                    self.moveView(view: self.filtersPanelView, x: 0.0, y: -(self.filtersPanelView.frame.height), isHidden: false)
+                })
             }
         case 2:
             if activeTab == 1 {
                 activeTab = 2
                 editTabButton.alpha = 1.0
                 filtersTabButton.alpha = 0.3
-                filtersPanelView.isHidden = true
-                editNabBarView.isHidden = false
-                navBarView.isHidden = true
+                moveView(view: filtersPanelView, x: 0.0, y: filtersPanelView.frame.height, isHidden: true)
+                moveView(view: navBarView, x: 0.0, y: -(navBarView.frame.height), isHidden: true, completion: {
+                    self.moveView(view: self.editNabBarView, x: 0.0, y: self.editNabBarView.frame.height, isHidden: false)
+                })
                 //panel.isHidden
             } else if activeTab == 2 {
                 activeTab = 0
-                navBarView.isHidden = false
+                moveView(view: editNabBarView, x: 0.0, y: -(editNabBarView.frame.height), isHidden: true, completion: {
+                    self.moveView(view: self.navBarView, x: 0.0, y: self.navBarView.frame.height, isHidden: false)
+                })
                 editTabButton.alpha = 0.3
-                editNabBarView.isHidden = true
             } else {
                 activeTab = 2
                 editTabButton.alpha = 1.0
-                navBarView.isHidden = true
-                editNabBarView.isHidden = false
+                moveView(view: navBarView, x: 0.0, y: -(navBarView.frame.height), isHidden: true, completion: {
+                    self.moveView(view: self.editNabBarView, x: 0.0, y: self.editNabBarView.frame.height, isHidden: false)
+                })
             }
         default: break
         }
@@ -140,7 +166,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     // MARK: - IBActions
     
     @IBAction func photoButtonTapped(_ sender: Any) {
-//        let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+        //        let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
     }
     
     //
@@ -191,5 +217,6 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     }
     
 }
+
 
 
