@@ -58,4 +58,3 @@ extension ViewController : AVCaptureVideoDataOutputSampleBufferDelegate {
         IOController.export(image: image!, sender: self)
     }
 }
-

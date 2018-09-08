@@ -18,14 +18,15 @@ class GestureController {
     static var startY: CGFloat!
     static var gestureDemention = 0 // 1 - horizontal, 2 - vertical
     static var lastX: CGFloat!
-    static var lastY: CGFloat!
+    static var lastY = (UIScreen.main.bounds.height / 2.0) - 51.0
     static var changeValue: Int!
     static var setValue = 0
-    static var setValueY = CGFloat(0.0)
-    static let step = UIScreen.main.bounds.width / 120.0
+    static let step = CGFloat(3.2)
     static var editName = "Exposure"
     static let maxValue = 100
     static let minValue = -100
+    
+    
     
     // MARK: - Methods
     
@@ -55,6 +56,12 @@ class GestureController {
                     gestureDemention = 1 //horizontal
                 } else {
                     gestureDemention = 2 //vertical
+                    UIView.animate(withDuration: 0.2) {
+                        viewController.editNabBarView.alpha = 0.0
+                    }
+                    UIView.animate(withDuration: 0.2) {
+                        viewController.editPanelView.alpha = 1.0
+                    }
                 }
             } else if gestureDemention == 1 {
                 //horizontal
@@ -83,12 +90,13 @@ class GestureController {
                 
             } else {
                 //vertical
-                viewController.editNabBarView.isHidden = true
-                viewController.editPanelView.isHidden = false
                 let shift = (location.y - startY)
                 //                changeValue = getChangeValue(shift: shift, maxValue: maxValue, minValue: minValue)
-                viewController.editPanelView.frame = CGRect(x: (UIScreen.main.bounds.width - viewController.editPanelView.frame.width) / 2.0, y: viewController.editPanelView.layer.position.y + shift, width: viewController.editPanelView.frame.width, height: viewController.editPanelView.frame.height)
+                viewController.editPanelView.frame = CGRect(x: (UIScreen.main.bounds.width - viewController.editPanelView.frame.width) / 2.0, y: lastY + shift, width: viewController.editPanelView.frame.width, height: viewController.editPanelView.frame.height)
                 
+                
+                let rectOfCellInTableView = viewController.editPanelTableView.rectForRow(at: (viewController.editPanelTableView.indexPathsForVisibleRows?.last)!)
+                let rectOfCellInSuperview = viewController.editPanelTableView.convert(rectOfCellInTableView, to: viewController.view)
             }
         }
         else {
@@ -102,8 +110,12 @@ class GestureController {
                 }
             } else {
                 //vertical
-                viewController.editNabBarView.isHidden = false
-                viewController.editPanelView.isHidden = true
+                UIView.animate(withDuration: 0.2) {
+                    viewController.editNabBarView.alpha = 1.0
+                }
+                UIView.animate(withDuration: 0.2) {
+                    viewController.editPanelView.alpha = 0.0
+                }
             }
             gestureDemention = 0
         }

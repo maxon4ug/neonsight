@@ -10,13 +10,15 @@ import UIKit
 import AVFoundation
 import GPUImage
 
-class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, AVCapturePhotoCaptureDelegate, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, AVCapturePhotoCaptureDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource {
+    
     
     // MARK: - Properties
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    let editList: [String] = ["Exposure", "ISO", "Contrast", "Brightness", ""]
     
     // MARK: IBOutlets
     
@@ -51,8 +53,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     @IBOutlet var filtersButtonCollection: [UIButton]!
     
     // EDIT PANEL
-    @IBOutlet weak var testLabel: UILabel!
     @IBOutlet weak var editPanelView: UIView!
+    @IBOutlet weak var editPanelTableView: UITableView!
     
     
     // MARK: - Methods
@@ -122,6 +124,29 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         default:
             break
         }
+    }
+    
+    
+    // MARK: - TableView setup
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    //
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return editList.count
+    }
+    
+    //
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "editCell", for: indexPath) as! EditPanelTableViewCell
+        
+        cell.nameLabel.text = editList[indexPath.row]
+        cell.valueLabel.text = "0"
+        
+        return cell
     }
     
 }

@@ -22,9 +22,11 @@ class UIController {
     
     class func setupUI(sender: ViewController) {
         UIController.viewController = sender
-        //        let editNavBarScaleBGGradient = CAGradientLayer()
-        //        editNavBarScaleBGGradient.colors = [UIColor(named: "neonPink")!, UIColor(named: "neonBlue")!]
-        //        editNavBarScaleBGView.layer.insertSublayer(editNavBarScaleBGGradient, at: 0)
+        
+//        let editNavBarScaleBGGradient = CAGradientLayer()
+//        UIController.viewController.editNavBarScaleBGGradient.colors = [UIColor(named: "neonPink")!.cgColor, UIColor(named: "neonBlue")!.cgColor]
+//        UIController.viewController.editNavBarScaleBGView.layer.insertSublayer(editNavBarScaleBGGradient, at: 0)
+
         UIController.viewController.editNavBarLabelBGView.layer.cornerRadius = UIController.viewController.editNavBarLabelBGView.frame.height / 2.0
         UIController.viewController.galleryPanelView.subviews.first!.layer.cornerRadius = UIController.viewController.galleryPanelView.frame.height / 2.0
         UIController.viewController.lightningPanelView.subviews.first!.layer.cornerRadius = UIController.viewController.lightningPanelView.frame.height / 2.0
