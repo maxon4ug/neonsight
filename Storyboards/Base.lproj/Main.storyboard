@@ -97,15 +97,15 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="50"/>
                                 <subviews>
                                     <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykU-k2-9aM">
-                                        <rect key="frame" x="126" y="21" width="123.66666666666669" height="37"/>
+                                        <rect key="frame" x="120" y="21" width="136" height="37"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="37" id="Dfu-ea-okI"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exposure" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pIO-WA-COr">
-                                        <rect key="frame" x="156" y="30.666666666666671" width="63.666666666666657" height="17.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exposure 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pIO-WA-COr">
+                                        <rect key="frame" x="150" y="30.666666666666671" width="76" height="17.333333333333329"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -791,7 +791,7 @@
                                             <constraint firstAttribute="bottom" secondItem="qCY-qj-SrS" secondAttribute="bottom" id="vbK-XD-rG6"/>
                                         </constraints>
                                     </view>
-                                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0HG-Ea-z1x" userLabel="Select View">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0HG-Ea-z1x" userLabel="Select View">
                                         <rect key="frame" x="62.666666666666657" y="339.66666666666669" width="249.99999999999997" height="55"/>
                                         <subviews>
                                             <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpC-C4-bv0" customClass="GradientViewPink" customModule="Neonsight" customModuleProvider="target">

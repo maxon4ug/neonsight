@@ -20,7 +20,6 @@ class GestureController {
     static var maxY: CGFloat!
     static var minY: CGFloat!
     static var cellSize: CGFloat!
-    static let halfCellSize: CGFloat = 55.0 / 2.0
     static let headerSize: CGFloat = 30.0
     
     //horizontal
@@ -49,8 +48,7 @@ class GestureController {
         sender.cameraView.addGestureRecognizer(longPress)
         cellSize = viewController.editPanelTableView.rectForRow(at: (viewController.editPanelTableView.indexPathsForVisibleRows?.first)!).height
         maxY = (UIScreen.main.bounds.height / 2.0) - (cellSize / 2.0) - headerSize
-        minY = (UIScreen.main.bounds.height / 2.0) + halfCellSize + headerSize - sender.editPanelListView.frame.height
-//        viewController.editPanelListView.frame = CGRect(x: (UIScreen.main.bounds.width - viewController.editPanelListView.frame.width) / 2.0, y: maxY, width: viewController.editPanelListView.frame.width, height: viewController.editPanelListView.frame.height)
+        minY = (UIScreen.main.bounds.height / 2.0) + (cellSize / 2.0) + headerSize - sender.editPanelListView.frame.height
     }
     
     //
@@ -134,16 +132,17 @@ class GestureController {
                     setValue = currentValue
                 }
                 viewController.editToolValueList[selectedEditToolNum] = setValue
-                updateEditPanelSelectedValue()
+                updateEditPanelSelectValue()
             } else {
                 //vertical
+                selectedEditToolNum = newSelectedEditToolNum
+                updateEditNavBarValue()
                 UIView.animate(withDuration: 0.2) {
                     viewController.editNabBarView.alpha = 1.0
                 }
                 UIView.animate(withDuration: 0.2) {
                     viewController.editPanelView.alpha = 0.0
                 }
-                selectedEditToolNum = newSelectedEditToolNum
             }
             gestureDemention = 0
             viewController.editPanelTableView.reloadData()
@@ -161,19 +160,26 @@ class GestureController {
     class func setSelectedEditTool(num: Int) {
         newSelectedEditToolNum = num
         setValue = viewController.editToolValueList[num]
-        viewController.editPanelSelectNameLabel.text = viewController.editToolList[num]
-        updateEditPanelSelectedValue()
         editName = viewController.editToolList[num]
+        updateEditPanelSelectValue()
     }
     
     //
-    class func updateEditPanelSelectedValue() {
+    class func updateEditPanelSelectValue() {
+        viewController.editPanelSelectNameLabel.text = viewController.editToolList[newSelectedEditToolNum]
         if newSelectedEditToolNum != 1 {
-            viewController.editNavBarLabel.text = "\(setValue > 0 ? editName + " +" : editName + " ")\(setValue)"
             viewController.editPanelSelectValueLabel.text = "\(setValue > 0 ? "+" : "")\(setValue)"
         } else {
-            viewController.editNavBarLabel.text = "\(editName) \(setValue)"
             viewController.editPanelSelectValueLabel.text = "\(setValue)"
+        }
+    }
+    
+    //
+    class func updateEditNavBarValue() {
+        if selectedEditToolNum != 1 {
+            viewController.editNavBarLabel.text = "\(setValue > 0 ? editName + " +" : editName + " ")\(setValue)"
+        } else {
+            viewController.editNavBarLabel.text = "\(editName) \(setValue)"
         }
     }
     
@@ -189,11 +195,11 @@ class GestureController {
             let cellPosition = viewController.editPanelTableView.convert(cell.layer.position, to: viewController.view)
             if cellPosition.y <= (UIScreen.main.bounds.height / 2.0 + cellSize / 2.0) && cellPosition.y >= (UIScreen.main.bounds.height / 2.0 - cellSize / 2.0) {
                 setSelectedEditTool(num: cellIndexPath.row)
-                cell.nameLabel.alpha = 0.0
-                cell.valueLabel.alpha = 0.0
+//                cell.nameLabel.alpha = 0.0
+//                cell.valueLabel.alpha = 0.0
             } else {
-                cell.nameLabel.alpha = 0.8
-                cell.valueLabel.alpha = 0.8
+//                cell.nameLabel.alpha = 0.8
+//                cell.valueLabel.alpha = 0.8
             }
         }
     }
