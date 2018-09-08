@@ -16,12 +16,14 @@ class EditPanelTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        if nameLabel.text == "" {
+            valueLabel.text = ""
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-//        self.alpha = 0.0
+        
     }
 
 }

@@ -13,15 +13,25 @@ class GestureController {
     // MARK: - Properties
     
     static var viewController: ViewController!
-    
-    static var startX: CGFloat!
-    static var startY: CGFloat!
     static var gestureDemention = 0 // 1 - horizontal, 2 - vertical
+    
+    //vetical
+    static var startY: CGFloat!
+    static var maxY: CGFloat!
+    static var minY: CGFloat!
+    static var cellSize: CGFloat!
+    static let halfCellSize: CGFloat = 55.0 / 2.0
+    static let headerSize: CGFloat = 30.0
+    
+    //horizontal
+    static var startX: CGFloat!
     static var lastX: CGFloat!
-    static var lastY = (UIScreen.main.bounds.height / 2.0) - 51.0
     static var changeValue: Int!
     static var setValue = 0
+    
     static let step = CGFloat(3.2)
+    static var selectedEditToolNum = 0
+    static var newSelectedEditToolNum = 0
     static var editName = "Exposure"
     static let maxValue = 100
     static let minValue = -100
@@ -37,7 +47,10 @@ class GestureController {
         longPress.minimumPressDuration = 0.0
         longPress.delegate = sender
         sender.cameraView.addGestureRecognizer(longPress)
-        
+        cellSize = viewController.editPanelTableView.rectForRow(at: (viewController.editPanelTableView.indexPathsForVisibleRows?.first)!).height
+        maxY = (UIScreen.main.bounds.height / 2.0) - (cellSize / 2.0) - headerSize
+        minY = (UIScreen.main.bounds.height / 2.0) + halfCellSize + headerSize - sender.editPanelListView.frame.height
+        setSelectedEditTool(num: 0)
     }
     
     //
@@ -62,9 +75,7 @@ class GestureController {
                     UIView.animate(withDuration: 0.2) {
                         viewController.editPanelView.alpha = 1.0
                     }
-                    UIView.animate(withDuration: 0.2) {
-                        viewController.editPanelSelectView.alpha = 1.0
-                    }
+
                 }
             } else if gestureDemention == 1 {
                 //horizontal
@@ -94,23 +105,38 @@ class GestureController {
             } else {
                 //vertical
                 let shift = (location.y - startY)
-                //                changeValue = getChangeValue(shift: shift, maxValue: maxValue, minValue: minValue)
-                viewController.editPanelView.frame = CGRect(x: (UIScreen.main.bounds.width - viewController.editPanelView.frame.width) / 2.0, y: lastY + shift, width: viewController.editPanelView.frame.width, height: viewController.editPanelView.frame.height)
+                let editPanelListViewCurrentPosition = maxY - (CGFloat(selectedEditToolNum) * cellSize) + shift
+                guard (editPanelListViewCurrentPosition < maxY) && (editPanelListViewCurrentPosition > minY) else { return }
                 
+                viewController.editPanelListView.frame = CGRect(x: (UIScreen.main.bounds.width - viewController.editPanelListView.frame.width) / 2.0, y: editPanelListViewCurrentPosition, width: viewController.editPanelListView.frame.width, height: viewController.editPanelListView.frame.height)
                 
-                let rectOfCellInTableView = viewController.editPanelTableView.rectForRow(at: (viewController.editPanelTableView.indexPathsForVisibleRows?.last)!)
-                let rectOfCellInSuperview = viewController.editPanelTableView.convert(rectOfCellInTableView, to: viewController.view)
+                for cellIndexPath in viewController.editPanelTableView.indexPathsForVisibleRows! {
+                    let cell = viewController.editPanelTableView.cellForRow(at: cellIndexPath) as! EditPanelTableViewCell
+                    let cellPosition = viewController.editPanelTableView.convert(cell.layer.position, to: viewController.view)
+                    if cellPosition.y <= (UIScreen.main.bounds.height / 2.0 + cellSize / 2.0) && cellPosition.y >= (UIScreen.main.bounds.height / 2.0 - cellSize / 2.0) {
+                        setSelectedEditTool(num: cellIndexPath.row)
+                        cell.nameLabel.alpha = 0.0
+                        cell.valueLabel.alpha = 0.0
+                    } else {
+                        cell.nameLabel.alpha = 0.6
+                        cell.valueLabel.alpha = 0.6
+                    }
+                }
             }
         }
         else {
             if gestureDemention == 1 {
                 let shift = (gesture.location(in: viewController.cameraView).x - startX)
-                setValue += getChangeValue(shift: shift, maxValue: 100, minValue: 100)
-                if setValue >= maxValue {
-                    lastX = 0.0
+                let currentValue = setValue + getChangeValue(shift: shift, maxValue: 100, minValue: 100)
+                if currentValue >= maxValue {
+                    setValue = maxValue
+                } else if currentValue <= minValue {
+                    setValue = minValue
                 } else {
-                    lastX = UIScreen.main.bounds.width
+                    setValue = currentValue
                 }
+                viewController.editToolValueList[selectedEditToolNum] = setValue
+                viewController.editPanelTableView.reloadData()
             } else {
                 //vertical
                 UIView.animate(withDuration: 0.2) {
@@ -119,9 +145,7 @@ class GestureController {
                 UIView.animate(withDuration: 0.2) {
                     viewController.editPanelView.alpha = 0.0
                 }
-                UIView.animate(withDuration: 0.2) {
-                    viewController.editPanelSelectView.alpha = 0.0
-                }
+                selectedEditToolNum = newSelectedEditToolNum
             }
             gestureDemention = 0
         }
@@ -134,8 +158,13 @@ class GestureController {
         return Int(value)
     }
     
+    
+    class func setSelectedEditTool(num: Int) {
+        newSelectedEditToolNum = num
+        viewController.editPanelSelectNameLabel.text = viewController.editToolList[num]
+        viewController.editPanelSelectValueLabel.text = "\(viewController.editToolValueList[num])"
+        editName = viewController.editToolList[num]
+        viewController.editNavBarLabel.text = "\(setValue > 0 ? editName + " +" : editName + " ")\(setValue)"
+        setValue = viewController.editToolValueList[num]
+    }
 }
-
-
-
-

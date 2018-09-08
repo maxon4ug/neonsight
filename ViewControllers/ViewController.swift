@@ -18,7 +18,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    let editList: [String] = ["Exposure", "ISO", "Contrast", "Brightness", ""]
+    let editToolList: [String] = ["Exposure", "ISO", "Contrast", "Brightness", ""]
+    var editToolValueList: [Int] = [0, 200, 0, 0, 0]
     
     // MARK: IBOutlets
     
@@ -55,10 +56,9 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     // EDIT PANEL
     @IBOutlet weak var editPanelView: UIView!
     @IBOutlet weak var editPanelTableView: UITableView!
-    @IBOutlet weak var editPanelSelectView: UIView!
     @IBOutlet weak var editPanelSelectNameLabel: UILabel!
     @IBOutlet weak var editPanelSelectValueLabel: UILabel!
-    
+    @IBOutlet weak var editPanelListView: UIView!
     
     // MARK: - Methods
     
@@ -139,19 +139,22 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return editList.count
+        return editToolList.count
     }
     
     //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "editCell", for: indexPath) as! EditPanelTableViewCell
         
-        cell.nameLabel.text = editList[indexPath.row]
-        cell.valueLabel.text = "0"
+        cell.nameLabel.text = editToolList[indexPath.row]
+        if indexPath.row != 1 {
+            cell.valueLabel.text = "\(editToolValueList[indexPath.row] > 0 ? "+" : "")\(editToolValueList[indexPath.row])"
+        } else {
+            cell.valueLabel.text = "\(editToolValueList[indexPath.row])"
+        }
         
         return cell
     }
-    
 }
 
 
