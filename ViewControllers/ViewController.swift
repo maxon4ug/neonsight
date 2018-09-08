@@ -55,6 +55,9 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     // EDIT PANEL
     @IBOutlet weak var editPanelView: UIView!
     @IBOutlet weak var editPanelTableView: UITableView!
+    @IBOutlet weak var editPanelSelectView: UIView!
+    @IBOutlet weak var editPanelSelectNameLabel: UILabel!
+    @IBOutlet weak var editPanelSelectValueLabel: UILabel!
     
     
     // MARK: - Methods

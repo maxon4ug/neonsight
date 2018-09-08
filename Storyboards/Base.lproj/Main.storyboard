@@ -788,16 +788,12 @@
                                     <constraint firstItem="XTd-rh-1ia" firstAttribute="centerX" secondItem="ZEk-nf-7AD" secondAttribute="centerX" id="vtO-xt-zXu"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="71Y-Ig-LSD">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="71Y-Ig-LSD" userLabel="Edit Tool Select">
                                 <rect key="frame" x="62" y="383.66666666666669" width="250" height="55"/>
                                 <subviews>
                                     <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FyZ-xP-jdl" customClass="GradientViewPink" customModule="Neonsight" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="-0.66666666666668561" width="250" height="55"/>
                                         <color key="backgroundColor" name="neonPink"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="250" id="WZg-jt-U10"/>
-                                            <constraint firstAttribute="height" constant="55" id="hm0-s2-enG"/>
-                                        </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contrast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ot8-ev-d0k">
                                         <rect key="frame" x="35" y="18.333333333333314" width="57" height="17.333333333333329"/>
@@ -955,6 +951,9 @@
                         <outlet property="editNabBarView" destination="KEl-6k-UIq" id="iS8-Ql-bxv"/>
                         <outlet property="editNavBarLabel" destination="pIO-WA-COr" id="Lqv-MR-s1I"/>
                         <outlet property="editNavBarLabelBGView" destination="ykU-k2-9aM" id="SR1-y4-oEI"/>
+                        <outlet property="editPanelSelectNameLabel" destination="ot8-ev-d0k" id="3Sv-XB-VmZ"/>
+                        <outlet property="editPanelSelectValueLabel" destination="iwm-hP-Mjj" id="WJy-BG-LkX"/>
+                        <outlet property="editPanelSelectView" destination="71Y-Ig-LSD" id="nMz-NV-Pu0"/>
                         <outlet property="editPanelTableView" destination="4SA-sd-YUr" id="u9z-0p-UR0"/>
                         <outlet property="editPanelView" destination="ZEk-nf-7AD" id="y4t-Os-E8N"/>
                         <outlet property="editTabButton" destination="fu8-AE-kbl" id="V4c-74-9ld"/>

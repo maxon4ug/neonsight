@@ -62,6 +62,9 @@ class GestureController {
                     UIView.animate(withDuration: 0.2) {
                         viewController.editPanelView.alpha = 1.0
                     }
+                    UIView.animate(withDuration: 0.2) {
+                        viewController.editPanelSelectView.alpha = 1.0
+                    }
                 }
             } else if gestureDemention == 1 {
                 //horizontal
@@ -115,6 +118,9 @@ class GestureController {
                 }
                 UIView.animate(withDuration: 0.2) {
                     viewController.editPanelView.alpha = 0.0
+                }
+                UIView.animate(withDuration: 0.2) {
+                    viewController.editPanelSelectView.alpha = 0.0
                 }
             }
             gestureDemention = 0
