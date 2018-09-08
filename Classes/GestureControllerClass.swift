@@ -50,7 +50,7 @@ class GestureController {
         cellSize = viewController.editPanelTableView.rectForRow(at: (viewController.editPanelTableView.indexPathsForVisibleRows?.first)!).height
         maxY = (UIScreen.main.bounds.height / 2.0) - (cellSize / 2.0) - headerSize
         minY = (UIScreen.main.bounds.height / 2.0) + halfCellSize + headerSize - sender.editPanelListView.frame.height
-        setSelectedEditTool(num: 0)
+//        viewController.editPanelListView.frame = CGRect(x: (UIScreen.main.bounds.width - viewController.editPanelListView.frame.width) / 2.0, y: maxY, width: viewController.editPanelListView.frame.width, height: viewController.editPanelListView.frame.height)
     }
     
     //
@@ -69,6 +69,8 @@ class GestureController {
                     gestureDemention = 1 //horizontal
                 } else {
                     gestureDemention = 2 //vertical
+                    updateEditPanelPosition(y: maxY - (CGFloat(selectedEditToolNum) * cellSize))
+                    updateSelectedCell()
                     UIView.animate(withDuration: 0.2) {
                         viewController.editNabBarView.alpha = 0.0
                     }
@@ -105,23 +107,19 @@ class GestureController {
             } else {
                 //vertical
                 let shift = (location.y - startY)
-                let editPanelListViewCurrentPosition = maxY - (CGFloat(selectedEditToolNum) * cellSize) + shift
-                guard (editPanelListViewCurrentPosition < maxY) && (editPanelListViewCurrentPosition > minY) else { return }
-                
-                viewController.editPanelListView.frame = CGRect(x: (UIScreen.main.bounds.width - viewController.editPanelListView.frame.width) / 2.0, y: editPanelListViewCurrentPosition, width: viewController.editPanelListView.frame.width, height: viewController.editPanelListView.frame.height)
-                
-                for cellIndexPath in viewController.editPanelTableView.indexPathsForVisibleRows! {
-                    let cell = viewController.editPanelTableView.cellForRow(at: cellIndexPath) as! EditPanelTableViewCell
-                    let cellPosition = viewController.editPanelTableView.convert(cell.layer.position, to: viewController.view)
-                    if cellPosition.y <= (UIScreen.main.bounds.height / 2.0 + cellSize / 2.0) && cellPosition.y >= (UIScreen.main.bounds.height / 2.0 - cellSize / 2.0) {
-                        setSelectedEditTool(num: cellIndexPath.row)
-                        cell.nameLabel.alpha = 0.0
-                        cell.valueLabel.alpha = 0.0
-                    } else {
-                        cell.nameLabel.alpha = 0.6
-                        cell.valueLabel.alpha = 0.6
-                    }
+                var editPanelListViewCurrentPosition = maxY - (CGFloat(selectedEditToolNum) * cellSize) + shift
+                if editPanelListViewCurrentPosition > maxY {
+                    editPanelListViewCurrentPosition = maxY
+                    startY = location.y
+                    selectedEditToolNum = 0
+                } else if editPanelListViewCurrentPosition < minY {
+                    editPanelListViewCurrentPosition = minY
+                    startY = location.y
+                    selectedEditToolNum = viewController.editToolList.count - 2
                 }
+                
+                updateEditPanelPosition(y: editPanelListViewCurrentPosition)
+                updateSelectedCell()
             }
         }
         else {
@@ -136,7 +134,7 @@ class GestureController {
                     setValue = currentValue
                 }
                 viewController.editToolValueList[selectedEditToolNum] = setValue
-                viewController.editPanelTableView.reloadData()
+                updateEditPanelSelectedValue()
             } else {
                 //vertical
                 UIView.animate(withDuration: 0.2) {
@@ -148,23 +146,55 @@ class GestureController {
                 selectedEditToolNum = newSelectedEditToolNum
             }
             gestureDemention = 0
+            viewController.editPanelTableView.reloadData()
         }
     }
     
-    
+    //
     class func getChangeValue(shift: CGFloat, maxValue: Int, minValue: Int) -> Int {
         let percentage = (shift / step)
         let value = CGFloat(maxValue) / 100 * percentage
         return Int(value)
     }
     
-    
+    //
     class func setSelectedEditTool(num: Int) {
         newSelectedEditToolNum = num
-        viewController.editPanelSelectNameLabel.text = viewController.editToolList[num]
-        viewController.editPanelSelectValueLabel.text = "\(viewController.editToolValueList[num])"
-        editName = viewController.editToolList[num]
-        viewController.editNavBarLabel.text = "\(setValue > 0 ? editName + " +" : editName + " ")\(setValue)"
         setValue = viewController.editToolValueList[num]
+        viewController.editPanelSelectNameLabel.text = viewController.editToolList[num]
+        updateEditPanelSelectedValue()
+        editName = viewController.editToolList[num]
+    }
+    
+    //
+    class func updateEditPanelSelectedValue() {
+        if newSelectedEditToolNum != 1 {
+            viewController.editNavBarLabel.text = "\(setValue > 0 ? editName + " +" : editName + " ")\(setValue)"
+            viewController.editPanelSelectValueLabel.text = "\(setValue > 0 ? "+" : "")\(setValue)"
+        } else {
+            viewController.editNavBarLabel.text = "\(editName) \(setValue)"
+            viewController.editPanelSelectValueLabel.text = "\(setValue)"
+        }
+    }
+    
+    //
+    class func updateEditPanelPosition(y: CGFloat) {
+        viewController.editPanelListView.frame = CGRect(x: (UIScreen.main.bounds.width - viewController.editPanelListView.frame.width) / 2.0, y: y, width: viewController.editPanelListView.frame.width, height: viewController.editPanelListView.frame.height)
+    }
+    
+    //
+    class func updateSelectedCell() {
+        for cellIndexPath in viewController.editPanelTableView.indexPathsForVisibleRows! {
+            let cell = viewController.editPanelTableView.cellForRow(at: cellIndexPath) as! EditPanelTableViewCell
+            let cellPosition = viewController.editPanelTableView.convert(cell.layer.position, to: viewController.view)
+            if cellPosition.y <= (UIScreen.main.bounds.height / 2.0 + cellSize / 2.0) && cellPosition.y >= (UIScreen.main.bounds.height / 2.0 - cellSize / 2.0) {
+                setSelectedEditTool(num: cellIndexPath.row)
+                cell.nameLabel.alpha = 0.0
+                cell.valueLabel.alpha = 0.0
+            } else {
+                cell.nameLabel.alpha = 0.8
+                cell.valueLabel.alpha = 0.8
+            }
+        }
     }
 }

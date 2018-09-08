@@ -72,7 +72,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIController.setupUI(sender: self)
-        CameraController.startCameraSession(sender: self)
+//        CameraController.startCameraSession(sender: self)
     }
     
     //
