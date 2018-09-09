@@ -28,6 +28,7 @@ class UIController {
         UIController.viewController.lightningPanelView.subviews.first!.layer.cornerRadius = UIController.viewController.lightningPanelView.frame.height / 2.0
         GestureController.setupGestureRecognizer(sender: sender)
         
+        sender.imagePicker.delegate = sender
     }
     
     
@@ -126,4 +127,34 @@ class UIController {
         }
     }
     
+    //
+    class func switchToImportMode() {
+        if viewController.importImage != nil {
+            viewController.tabBarHeightConstraint.constant = 50.0
+            viewController.tabBarLeadingConstraint.constant = 20.0
+            viewController.tabBarTraillingConstraint.constant = 20.0
+            viewController.photoButton.isHidden = true
+            viewController.lightningPanelView.alpha = 0.0
+            viewController.galleryButton.setImage(UIImage(named: "close"), for: .normal)
+            viewController.changeCameraButton.setImage(UIImage(named: "export"), for: .normal)
+        } else {
+            viewController.tabBarHeightConstraint.constant = 85.0
+            viewController.tabBarLeadingConstraint.constant = 0.0
+            viewController.tabBarTraillingConstraint.constant = 0.0
+            viewController.photoButton.isHidden = false
+            viewController.lightningPanelView.alpha = 0.8
+            viewController.galleryButton.setImage(UIImage(named: "gallery"), for: .normal)
+            viewController.changeCameraButton.setImage(UIImage(named: "frontalCam"), for: .normal)
+        }
+        if activeTab != 1 {
+            switchTab(to: 1)
+        }
+        clearEditTab()
+    }
+    
+    class func clearEditTab() {
+        viewController.editToolValueList = viewController.editToolDefaultValueList
+        GestureController.setSelectedEditTool(num: 0)
+        viewController.editPanelTableView.reloadData()
+    }
 }

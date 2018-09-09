@@ -11,8 +11,13 @@ import AVFoundation
 
 class IOController {
     
+    // MARK: - Properties
     
-    class func export(image: UIImage, sender: UIViewController) {
+    
+    
+    // MARK: - Methods
+    
+    class func exportImage(image: UIImage, sender: ViewController) {
         
         let activityViewController = UIActivityViewController(activityItems: [ image ], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = sender.view
@@ -20,8 +25,22 @@ class IOController {
         //        activityViewController.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
         //
         //        }
-        sender.present(activityViewController, animated: true, completion: nil)
+        sender.present(activityViewController, animated: true, completion: {
+            sender.changeCameraButton.alpha = 0.3
+        })
     }
     
+    
+    //
+    class func importImage(sender: ViewController) {
+        sender.imagePicker.allowsEditing = false
+        sender.imagePicker.sourceType = .photoLibrary
+        /*
+         UIImagePickerControllerSourceType.PhotoLibrary
+         UIImagePickerControllerSourceType.Camera
+         UIImagePickerControllerSourceType.SavedPhotosAlbum
+         */
+        sender.present(sender.imagePicker, animated: true, completion: nil)
+    }
     
 }

@@ -30,13 +30,12 @@ class GestureController {
     static var setValue = 0
     
     //doubletap
-    static var tapCount = 0
-    static var tapTime = Date()
+    static var tapTime = Date(timeIntervalSince1970: 0)
     
-    static let step = (UIScreen.main.bounds.width / 2.0) / 60.0
+    static let step = (UIScreen.main.bounds.width / 2.0) / 80.0
     static var selectedEditToolNum = 0
     static var newSelectedEditToolNum = 0
-    static var editName = "Exposure"
+    static var editName = "ExposuRe"
     static let maxValue = 100
     static let minValue = -100
     
@@ -55,7 +54,7 @@ class GestureController {
         cellSize = viewController.editPanelTableView.rectForRow(at: (viewController.editPanelTableView.indexPathsForVisibleRows?.first)!).height
         maxY = (UIScreen.main.bounds.height / 2.0) - (cellSize / 2.0) - headerSize
         minY = (UIScreen.main.bounds.height / 2.0) + (cellSize / 2.0) + headerSize - sender.editPanelListView.frame.height
-        updateEditNavBarValue()
+        setSelectedEditTool(num: 0)
     }
     
     //
@@ -86,21 +85,6 @@ class GestureController {
                             viewController.editPanelView.alpha = 1.0
                         }
                     }
-                
-//                if abs(Int32(startX - location.x)) > abs(Int32(startY - location.y)) {
-//                    gestureDemention = 1 //horizontal
-//                } else {
-//                    gestureDemention = 2 //vertical
-//                    updateEditPanelPosition(y: maxY - (CGFloat(selectedEditToolNum) * cellSize))
-//                    updateSelectedCell()
-//                    UIView.animate(withDuration: 0.2) {
-//                        viewController.editNabBarView.alpha = 0.0
-//                    }
-//                    UIView.animate(withDuration: 0.2) {
-//                        viewController.editPanelView.alpha = 1.0
-//                    }
-//
-//                }
             } else if gestureDemention == 1 {
                 //horizontal
                 let shift = (location.x - startX)
@@ -151,13 +135,12 @@ class GestureController {
                 } else {
                     setValue = currentValue
                 }
-                viewController.editToolValueList[selectedEditToolNum] = setValue
+                viewController.editToolValueList[selectedEditToolNum] = Double(setValue)
                 //
                 updateEditPanelSelectView()
             } else if gestureDemention == 2 {
                 //vertical
                 selectedEditToolNum = newSelectedEditToolNum
-                updateEditNavBarValue()
                 UIView.animate(withDuration: 0.2) {
                     viewController.editNabBarView.alpha = 1.0
                 }
@@ -165,18 +148,13 @@ class GestureController {
                     viewController.editPanelView.alpha = 0.0
                 }
             } else {
-                tapCount += 1
-                if tapCount == 1 {
-                    tapTime = Date()
-                } else {
-                    if Date().timeIntervalSince(tapTime) <= 0.3  {
-                        let defaultValue = 0
-                        setValue = defaultValue
-                        viewController.editToolValueList[selectedEditToolNum] = defaultValue
-                        updateEditNavBarValue()
-                    }
-                    tapCount = 0
+                if Date().timeIntervalSince(tapTime) <= 0.3  {
+                    let defaultValue = viewController.editToolDefaultValueList[selectedEditToolNum]
+                    setValue = Int(defaultValue)
+                    viewController.editToolValueList[selectedEditToolNum] = defaultValue
+                    updateEditNavBarValue()
                 }
+                tapTime = Date()
             }
             gestureDemention = 0
             viewController.editPanelTableView.reloadData()
@@ -192,6 +170,7 @@ class GestureController {
     
     //
     class func updateEditNavBarValue(newValue: Int = setValue) {
+        viewController.editNavBarLabel.fadeTransition(0.1)
         if selectedEditToolNum != 1 {
             viewController.editNavBarLabel.text = "\(newValue > 0 ? editName + " +" : editName + " ")\(newValue)"
         } else {
@@ -212,7 +191,6 @@ class GestureController {
             let cellPosition = viewController.editPanelTableView.convert(cell.layer.position, to: viewController.view)
             if cellPosition.y <= (UIScreen.main.bounds.height / 2.0 + cellSize / 2.0) && cellPosition.y >= (UIScreen.main.bounds.height / 2.0 - cellSize / 2.0) {
                 guard currentCell != cellIndexPath.row else { return }
-                currentCell = cellIndexPath.row
                 setSelectedEditTool(num: cellIndexPath.row)
             }
         }
@@ -221,11 +199,13 @@ class GestureController {
     //
     class func setSelectedEditTool(num: Int) {
         newSelectedEditToolNum = num
-        setValue = viewController.editToolValueList[num]
+        setValue = Int(viewController.editToolValueList[num])
         editName = viewController.editToolList[num]
+        currentCell = num
         updateEditPanelSelectView()
         //        maxValue =
         //        minValue
+        updateEditNavBarValue()
     }
     
     //
@@ -243,11 +223,7 @@ class GestureController {
     //
     class func updateValueGradientView(newValue: Int = setValue) {
         let percentage = CGFloat(newValue) / CGFloat(maxValue)
-        if newValue > 0 {
-            viewController.editNavBarValueGradientMaskView.frame = CGRect(x: UIScreen.main.bounds.width / 2.0, y: 0, width: UIScreen.main.bounds.width / 2.0 * percentage, height: viewController.editNavBarValueGradientMaskView.frame.height)
-        } else {
-            viewController.editNavBarValueGradientMaskView.frame = CGRect(x: (UIScreen.main.bounds.width / 2.0), y: 0, width: UIScreen.main.bounds.width / 2.0 * percentage, height: viewController.editNavBarValueGradientMaskView.frame.height)
-        }
+        viewController.editNavBarValueGradientMaskView.frame = CGRect(x: UIScreen.main.bounds.width / 2.0, y: 0, width: UIScreen.main.bounds.width / 2.0 * percentage, height: viewController.editNavBarValueGradientMaskView.frame.height)
         viewController.editNavBarValueGradientView.layer.mask = viewController.editNavBarValueGradientMaskView.layer
     }
 }

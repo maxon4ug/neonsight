@@ -171,7 +171,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DsW-g9-GMm" userLabel="Filters Panel">
-                                <rect key="frame" x="0.0" y="587" width="375" height="105"/>
+                                <rect key="frame" x="0.0" y="588" width="375" height="105"/>
                                 <subviews>
                                     <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bt-I0-mv9" userLabel="Background">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
@@ -813,7 +813,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0HG-Ea-z1x" userLabel="Select View">
                                         <rect key="frame" x="62.666666666666657" y="339.66666666666669" width="249.99999999999997" height="55"/>
                                         <subviews>
-                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpC-C4-bv0" customClass="GradientViewPink" customModule="Neonsight" customModuleProvider="target">
+                                            <view alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpC-C4-bv0" customClass="GradientViewPink" customModule="Neonsight" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="-0.66666666666668561" width="250" height="55"/>
                                                 <color key="backgroundColor" name="neonPink"/>
                                             </view>
@@ -842,7 +842,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.087345336294416209" green="0.087345336294416209" blue="0.087345336294416209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.070748730964466988" green="0.070748730964466988" blue="0.070748730964466988" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="3FX-9R-Aas"/>
                                             <constraint firstAttribute="height" constant="55" id="4Cb-Et-XmW"/>
@@ -871,13 +871,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZNG-nr-tB1" userLabel="Tab Bar">
-                                <rect key="frame" x="0.0" y="692" width="375" height="86"/>
+                                <rect key="frame" x="0.0" y="693" width="375" height="85"/>
                                 <subviews>
                                     <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="hm0-Jg-06b" userLabel="Tabs Stack View">
-                                        <rect key="frame" x="0.0" y="-1" width="375" height="87"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                         <subviews>
                                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OnU-FH-wLA">
-                                                <rect key="frame" x="0.0" y="41" width="10" height="5"/>
+                                                <rect key="frame" x="0.0" y="40" width="10" height="5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="10" id="VaM-KC-mXQ"/>
@@ -885,7 +885,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fu8-AE-kbl" userLabel="Edit Btn">
-                                                <rect key="frame" x="66.333333333333329" y="1" width="60" height="85"/>
+                                                <rect key="frame" x="66.333333333333329" y="0.0" width="60" height="85"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="85" id="33c-Qg-lfm"/>
                                                     <constraint firstAttribute="width" constant="60" id="eyf-CQ-Kcp"/>
@@ -896,7 +896,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bqr-i3-2aa" userLabel="Photo Btn">
-                                                <rect key="frame" x="147.66666666666666" y="1" width="80" height="85"/>
+                                                <rect key="frame" x="147.66666666666666" y="0.0" width="80" height="85"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="80" id="GUn-oU-6aK"/>
                                                     <constraint firstAttribute="height" constant="85" id="Wmi-Z1-lDw"/>
@@ -906,19 +906,20 @@
                                                     <action selector="photoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iMD-6N-xiD"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" alpha="0.30000001192092896" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haw-3z-hJI" userLabel="Frontal cam button">
-                                                <rect key="frame" x="248.66666666666663" y="1" width="60" height="85"/>
+                                            <button opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haw-3z-hJI" userLabel="Frontal cam button">
+                                                <rect key="frame" x="248.66666666666663" y="0.0" width="60" height="85"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="85" id="BxP-l6-4Fa"/>
                                                     <constraint firstAttribute="width" constant="60" id="h74-KE-c1e"/>
                                                 </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="frontalCam"/>
                                                 <connections>
                                                     <action selector="changeCameraButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rwI-Ew-5DR"/>
                                                 </connections>
                                             </button>
                                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ERs-U9-ZLR">
-                                                <rect key="frame" x="365" y="41" width="10" height="5"/>
+                                                <rect key="frame" x="365" y="40" width="10" height="5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="5" id="RLq-NX-DsR"/>
@@ -928,7 +929,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0RX-1S-6hY" userLabel="Filters Btn">
-                                        <rect key="frame" x="0.0" y="0.0" width="60" height="85"/>
+                                        <rect key="frame" x="0.0" y="-0.33333333333337123" width="60" height="85"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="85" id="hhh-Sw-Svz"/>
                                             <constraint firstAttribute="width" constant="60" id="jFm-Or-FKf"/>
@@ -939,7 +940,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" alpha="0.30000001192092896" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqr-5y-uAf" userLabel="MoreInfo Btn">
-                                        <rect key="frame" x="315" y="0.0" width="60" height="85"/>
+                                        <rect key="frame" x="315" y="-0.33333333333337123" width="60" height="85"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="ZkE-bj-5zX"/>
                                             <constraint firstAttribute="height" constant="85" id="ztT-K6-Wkg"/>
@@ -954,8 +955,8 @@
                                 <constraints>
                                     <constraint firstItem="hm0-Jg-06b" firstAttribute="leading" secondItem="ZNG-nr-tB1" secondAttribute="leading" id="9EY-QC-oyI"/>
                                     <constraint firstAttribute="trailing" secondItem="hm0-Jg-06b" secondAttribute="trailing" id="HXa-HO-BYQ"/>
-                                    <constraint firstAttribute="height" constant="86" id="TE9-Xw-L04"/>
-                                    <constraint firstItem="hm0-Jg-06b" firstAttribute="top" secondItem="ZNG-nr-tB1" secondAttribute="top" constant="-1" id="ThM-1C-leL"/>
+                                    <constraint firstAttribute="height" constant="85" id="TE9-Xw-L04"/>
+                                    <constraint firstItem="hm0-Jg-06b" firstAttribute="top" secondItem="ZNG-nr-tB1" secondAttribute="top" id="ThM-1C-leL"/>
                                     <constraint firstItem="uqr-5y-uAf" firstAttribute="centerY" secondItem="ZNG-nr-tB1" secondAttribute="centerY" id="Uf3-uf-Qsp"/>
                                     <constraint firstAttribute="bottom" secondItem="hm0-Jg-06b" secondAttribute="bottom" id="Zbk-t2-0p4"/>
                                     <constraint firstItem="0RX-1S-6hY" firstAttribute="centerY" secondItem="ZNG-nr-tB1" secondAttribute="centerY" id="rrj-L0-MNV"/>
@@ -970,8 +971,8 @@
                             <constraint firstItem="RZg-lg-os0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="8i4-RR-lsA"/>
                             <constraint firstItem="DsW-g9-GMm" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Akr-i2-pDC"/>
                             <constraint firstItem="KEl-6k-UIq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="BUz-bf-3WH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="axp-VX-ui7" secondAttribute="bottom" constant="50" id="CHL-C9-bZc"/>
                             <constraint firstItem="P8r-2j-kVR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-22" id="DPE-kd-Afo"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="axp-VX-ui7" secondAttribute="bottom" constant="50" id="QTt-BE-aNk"/>
                             <constraint firstItem="FzI-tp-4yu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="R40-t5-Ach"/>
                             <constraint firstItem="FzI-tp-4yu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="U4a-IS-rXV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FzI-tp-4yu" secondAttribute="bottom" id="U5x-FY-nmg"/>
@@ -1018,6 +1019,9 @@
                         <outlet property="lightningButton" destination="EJp-0h-MpY" id="bRU-pX-Oc1"/>
                         <outlet property="lightningPanelView" destination="P8r-2j-kVR" id="eOQ-ue-zS5"/>
                         <outlet property="photoButton" destination="bqr-i3-2aa" id="LAL-SJ-D8X"/>
+                        <outlet property="tabBarHeightConstraint" destination="TE9-Xw-L04" id="H6g-hw-Bkb"/>
+                        <outlet property="tabBarLeadingConstraint" destination="9EY-QC-oyI" id="U0l-CZ-OQ6"/>
+                        <outlet property="tabBarTraillingConstraint" destination="HXa-HO-BYQ" id="zZD-Qw-e9k"/>
                         <outlet property="tabBarView" destination="ZNG-nr-tB1" id="sgx-xm-feM"/>
                         <outletCollection property="filtersImageViewCollection" destination="3Er-KZ-7Cf" collectionClass="NSMutableArray" id="kkx-zm-dTc"/>
                         <outletCollection property="filtersImageViewCollection" destination="ybn-hX-hDT" collectionClass="NSMutableArray" id="43S-yh-daO"/>

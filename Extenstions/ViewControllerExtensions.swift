@@ -55,6 +55,41 @@ extension ViewController : AVCaptureVideoDataOutputSampleBufferDelegate {
         //        comicEffect!.setValue(ciImage, forKey: kCIInputImageKey)
         //        let cgImage = self.ciContext.createCGImage(comicEffect!.outputImage!, from: ciImage.extent)!
         let image = UIImage(data: imageData)
-        IOController.export(image: image!, sender: self)
+        IOController.exportImage(image: image!, sender: self)
     }
+}
+
+
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            importImage = pickedImage
+            cameraImageView.image = pickedImage
+            UIController.switchToImportMode()
+        }
+        /*
+         
+         Swift Dictionary named “info”.
+         We have to unpack it from there with a key asking for what media information we want.
+         We just want the image, so that is what we ask for.  For reference, the available options are:
+         
+         UIImagePickerControllerMediaType
+         UIImagePickerControllerOriginalImage
+         UIImagePickerControllerEditedImage
+         UIImagePickerControllerCropRect
+         UIImagePickerControllerMediaURL
+         UIImagePickerControllerReferenceURL
+         UIImagePickerControllerMediaMetadata
+         
+         */
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        CameraController.camera.startCapture()
+        dismiss(animated: true, completion:nil)
+    }
+    
 }

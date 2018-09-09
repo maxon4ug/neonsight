@@ -19,7 +19,11 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         return true
     }
     let editToolList: [String] = ["Exposure", "ISO", "Contrast", "Brightness", ""]
-    var editToolValueList: [Int] = [0, 200, 0, 0, 0]
+    var editToolValueList = [0, 200, 0, 0, 0.0]
+    let editToolDefaultValueList = [0, 200, 0, 0, 0.0]
+    var importImage: UIImage!
+    let imagePicker = UIImagePickerController()
+    
     
     // MARK: IBOutlets
     
@@ -33,6 +37,9 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     @IBOutlet weak var editTabButton: UIButton!
     @IBOutlet weak var changeCameraButton: UIButton!
     @IBOutlet weak var infoTabButton: UIButton!
+    @IBOutlet weak var tabBarLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tabBarTraillingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tabBarHeightConstraint: NSLayoutConstraint!
     
     // NAV BAR
     @IBOutlet weak var galleryButton: UIButton!
@@ -53,7 +60,6 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     @IBOutlet weak var editNavBarLabelBGView: UIView!
     @IBOutlet weak var editNavBarValueGradientView: UIView!
     @IBOutlet weak var editNavBarValueGradientMaskView: UIView!
-    
     
     // EDIT PANEL
     @IBOutlet weak var editPanelView: UIView!
@@ -105,8 +111,14 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     }
     
     //
-    @IBAction func changeCameraButtonTapped(_ sender: Any) {
-        CameraController.camera.location = .frontFacing
+    @IBAction func changeCameraButtonTapped(_ sender: Any) { //export button
+        if importImage != nil {
+            changeCameraButton.alpha = 1.0
+            IOController.exportImage(image: importImage, sender: self)
+        } else {
+            CameraController.camera.stopCapture()
+            CameraController.camera.location = .frontFacing
+        }
     }
     
     //
@@ -119,13 +131,20 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     }
     
     //
-    @IBAction func galleryButtonTapped(_ sender: Any) {
-        CameraController.camera.stopCapture()
+    @IBAction func galleryButtonTapped(_ sender: Any) { //close button
+        if importImage != nil { //close
+            CameraController.camera.startCapture()
+            cameraImageView.image = nil
+            importImage = nil
+            UIController.switchToImportMode()
+        } else {
+            IOController.importImage(sender: self)
+            CameraController.camera.stopCapture()
+        }
     }
     
     //
     @IBAction func filterButtonTapped(_ sender: UIButton) {
-        
         switch sender.tag {
         case 0:
             let filter = SaturationAdjustment()
