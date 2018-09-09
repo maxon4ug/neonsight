@@ -1,5 +1,5 @@
 //
-//  GestureControllerClass.swift
+//  EditTabControllerClass.swift
 //  Neonsight
 //
 //  Created by Max Surgai on 06.09.2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GestureController {
+class EditTabController {
     
     // MARK: - Properties
     

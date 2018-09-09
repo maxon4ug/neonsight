@@ -26,7 +26,7 @@ class UIController {
         UIController.viewController.editNavBarLabelBGView.layer.cornerRadius = UIController.viewController.editNavBarLabelBGView.frame.height / 2.0
         UIController.viewController.galleryPanelView.subviews.first!.layer.cornerRadius = UIController.viewController.galleryPanelView.frame.height / 2.0
         UIController.viewController.lightningPanelView.subviews.first!.layer.cornerRadius = UIController.viewController.lightningPanelView.frame.height / 2.0
-        GestureController.setupGestureRecognizer(sender: sender)
+        EditTabController.setupGestureRecognizer(sender: sender)
         
         sender.imagePicker.delegate = sender
     }
@@ -154,7 +154,7 @@ class UIController {
     
     class func clearEditTab() {
         viewController.editToolValueList = viewController.editToolDefaultValueList
-        GestureController.setSelectedEditTool(num: 0)
+        EditTabController.setSelectedEditTool(num: 0)
         viewController.editPanelTableView.reloadData()
     }
 }
