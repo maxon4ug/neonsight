@@ -40,12 +40,6 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     @IBOutlet weak var lightningPanelView: UIView!
     @IBOutlet weak var galleryPanelView: UIView!
     
-    // EDIT NAV BAR
-    @IBOutlet weak var editNabBarView: UIView!
-    //    @IBOutlet weak var editNavBarScaleBGView: UIView!
-    @IBOutlet weak var editNavBarLabel: UILabel!
-    @IBOutlet weak var editNavBarLabelBGView: UIView!
-    
     // FILTERS PANEL
     @IBOutlet weak var filtersPanelView: UIView!
     @IBOutlet weak var filtersScrollView: UIScrollView!
@@ -53,12 +47,24 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     @IBOutlet var filtersNameLableCollection: [UILabel]!
     @IBOutlet var filtersButtonCollection: [UIButton]!
     
+    // EDIT NAV BAR
+    @IBOutlet weak var editNabBarView: UIView!
+    @IBOutlet weak var editNavBarLabel: UILabel!
+    @IBOutlet weak var editNavBarLabelBGView: UIView!
+    @IBOutlet weak var editNavBarValueGradientView: UIView!
+    @IBOutlet weak var editNavBarValueGradientMaskView: UIView!
+    
+    
     // EDIT PANEL
     @IBOutlet weak var editPanelView: UIView!
     @IBOutlet weak var editPanelTableView: UITableView!
     @IBOutlet weak var editPanelSelectNameLabel: UILabel!
     @IBOutlet weak var editPanelSelectValueLabel: UILabel!
+    @IBOutlet weak var editPanelSelectNewNameLabel: UILabel!
+    @IBOutlet weak var editPanelSelectNewValueLabel: UILabel!
     @IBOutlet weak var editPanelListView: UIView!
+    
+    
     
     // MARK: - Methods
     
