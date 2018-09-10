@@ -12,11 +12,11 @@ class EditTool {
     
     // MARK: - Properties
     
-    var name: String
+    let name: String
     var value: Double
-    var defaultValue: Double
-    var maxValue: Double
-    var minValue: Double
+    let defaultValue: Double
+    let maxValue: Double
+    let minValue: Double
     
     
     // MARK: - Methods
@@ -29,6 +29,16 @@ class EditTool {
         self.minValue = minValue
     }
     
+    //
+    init(name: String, value: Double) {
+        self.name = name
+        self.value = value
+        self.defaultValue = 0
+        self.maxValue = 0
+        self.minValue = 0
+    }
+    
+    //
     public func clearValue() {
         value = defaultValue
     }
