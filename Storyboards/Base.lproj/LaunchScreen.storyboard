@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,50 +18,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s7A-qs-Hzy">
-                                <rect key="frame" x="0.0" y="20" width="375" height="562"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="WVm-tx-9I4">
-                                        <rect key="frame" x="97" y="186" width="180" height="190"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="aaY-WM-FDp">
-                                                <rect key="frame" x="0.0" y="0.0" width="180" height="120"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="180" id="4Y7-H5-qB3"/>
-                                                    <constraint firstAttribute="height" constant="120" id="ubJ-MY-vUU"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#neonsight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofa-QM-KJA">
-                                                <rect key="frame" x="26" y="155" width="128" height="35"/>
-                                                <fontDescription key="fontDescription" name="KohinoorBangla-Light" family="Kohinoor Bangla" pointSize="25"/>
-                                                <color key="textColor" name="neonBlue"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#neonsight" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofa-QM-KJA">
+                                <rect key="frame" x="134.5" y="595" width="106.5" height="22"/>
+                                <fontDescription key="fontDescription" name="Symbol" family="Symbol" pointSize="22"/>
+                                <color key="textColor" red="0.98003251899999999" green="0.98003251899999999" blue="0.98003251899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="aaY-WM-FDp">
+                                <rect key="frame" x="97" y="170" width="180" height="120"/>
                                 <constraints>
-                                    <constraint firstItem="WVm-tx-9I4" firstAttribute="centerY" secondItem="s7A-qs-Hzy" secondAttribute="centerY" id="PvP-XJ-KmT"/>
-                                    <constraint firstItem="WVm-tx-9I4" firstAttribute="centerX" secondItem="s7A-qs-Hzy" secondAttribute="centerX" id="hNg-t3-XgZ"/>
-                                </constraints>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tab Bar" translatesAutoresizingMaskIntoConstraints="NO" id="omE-Gr-hYF">
-                                <rect key="frame" x="0.0" y="582" width="375" height="85"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="85" id="2cB-bw-Df2"/>
+                                    <constraint firstAttribute="width" constant="180" id="4Y7-H5-qB3"/>
+                                    <constraint firstAttribute="height" constant="120" id="ubJ-MY-vUU"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="s7A-qs-Hzy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="73i-fn-e6O"/>
-                            <constraint firstItem="s7A-qs-Hzy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="KDy-31-QZF"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="omE-Gr-hYF" secondAttribute="trailing" id="Vc7-Oz-IAj"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="s7A-qs-Hzy" secondAttribute="trailing" id="bbS-Cp-JH9"/>
-                            <constraint firstItem="omE-Gr-hYF" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="pf9-bT-pN7"/>
-                            <constraint firstItem="omE-Gr-hYF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="py9-SH-POT"/>
-                            <constraint firstItem="omE-Gr-hYF" firstAttribute="top" secondItem="s7A-qs-Hzy" secondAttribute="bottom" id="yZU-6l-ggX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ofa-QM-KJA" secondAttribute="bottom" constant="50" id="BOP-qv-ekp"/>
+                            <constraint firstItem="ofa-QM-KJA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="E1z-2P-42x"/>
+                            <constraint firstItem="aaY-WM-FDp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="bqr-qx-eJi"/>
+                            <constraint firstItem="aaY-WM-FDp" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ueF-Nt-wki"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -75,10 +50,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Tab Bar" width="375" height="84"/>
         <image name="logo" width="181" height="121"/>
-        <namedColor name="neonBlue">
-            <color red="0.015686274509803921" green="1" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>

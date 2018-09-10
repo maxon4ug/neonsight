@@ -40,13 +40,11 @@ class EditTabController {
         EditTool(name: "Exposure", value: 0, maxValue: 100, minValue: -100),
         EditTool(name: "Contrast", value: 0, maxValue: 100, minValue: -100),
         EditTool(name: "Brightness", value: 0, maxValue: 100, minValue: -100),
-        EditTool(name: "Details", value: 0, maxValue: 100, minValue: -100),
-        EditTool(name: "Contrast", value: 0, maxValue: 100, minValue: -100),
-        EditTool(name: "Brightness", value: 0, maxValue: 100, minValue: -100),
-        EditTool(name: "Details", value: 0, maxValue: 100, minValue: -100),
-        EditTool(name: "Contrast", value: 0, maxValue: 100, minValue: -100),
-        EditTool(name: "Brightness", value: 0, maxValue: 100, minValue: -100),
-        EditTool(name: "empty", value: 0, maxValue: 0, minValue: 0)
+        EditTool(name: "Saturation", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "Tone", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "W/B balance", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "Fade", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "Vignette", value: 0, maxValue: 100, minValue: -100)
     ]
     
     
@@ -129,7 +127,7 @@ class EditTabController {
                 } else if editPanelListViewCurrentPosition < minY {
                     editPanelListViewCurrentPosition = minY
                     startY = location.y
-                    selectedEditToolNum = editToolList.count - 3
+                    selectedEditToolNum = editToolList.count - 1
                 }
                 updateEditPanelPosition(y: editPanelListViewCurrentPosition)
                 updateSelectedCell()
@@ -219,9 +217,9 @@ class EditTabController {
         viewController.editPanelSelectValueLabel.fadeTransition(0.15)
         viewController.editPanelSelectNameLabel.text = editToolList[newSelectedEditToolNum].name
         if newSelectedEditToolNum != 1 {
-            viewController.editPanelSelectValueLabel.text = "\(editToolList[newSelectedEditToolNum].value > 0 ? "+" : "")\(editToolList[newSelectedEditToolNum].value)"
+            viewController.editPanelSelectValueLabel.text = "\(editToolList[newSelectedEditToolNum].value > 0 ? "+" : "")\(Int(editToolList[newSelectedEditToolNum].value))"
         } else {
-            viewController.editPanelSelectValueLabel.text = "\(editToolList[newSelectedEditToolNum].value)"
+            viewController.editPanelSelectValueLabel.text = "\(Int(editToolList[newSelectedEditToolNum].value))"
         }
     }
     

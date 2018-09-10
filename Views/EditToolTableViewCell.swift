@@ -13,7 +13,7 @@ class EditToolTableViewCell: UITableViewCell {
     public var editTool: EditTool! {
         didSet{
             nameLabel.text = editTool.name
-            valueLabel.text = "\(editTool.value)"
+            valueLabel.text = self.editTool.value <= 0 ? "\(Int(editTool.value))" : "+\(Int(editTool.value))"
         }
     }
     @IBOutlet weak var nameLabel: UILabel!
