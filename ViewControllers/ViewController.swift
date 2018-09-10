@@ -18,9 +18,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    let editToolList: [String] = ["Exposure", "ISO", "Contrast", "Brightness", ""]
-    var editToolValueList = [0, 200, 0, 0, 0.0]
-    let editToolDefaultValueList = [0, 200, 0, 0, 0.0]
+    
     var importImage: UIImage!
     let imagePicker = UIImagePickerController()
     
@@ -69,7 +67,6 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     @IBOutlet weak var editPanelSelectNewNameLabel: UILabel!
     @IBOutlet weak var editPanelSelectNewValueLabel: UILabel!
     @IBOutlet weak var editPanelListView: UIView!
-    
     
     
     // MARK: - Methods
@@ -132,14 +129,17 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     //
     @IBAction func galleryButtonTapped(_ sender: Any) { //close button
+        cameraImageView.fadeTransition(0.2)
         if importImage != nil { //close
-            CameraController.camera.startCapture()
+            CameraController.camera.stopCapture()
             cameraImageView.image = nil
             importImage = nil
             UIController.switchToImportMode()
+            cameraImageView.alpha = 0.0
         } else {
             IOController.importImage(sender: self)
             CameraController.camera.stopCapture()
+            cameraImageView.alpha = 1.0
         }
     }
     
@@ -165,20 +165,15 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return editToolList.count
+        return EditTabController.editToolList.count
     }
     
     //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "editCell", for: indexPath) as! EditPanelTableViewCell
-        
-        cell.nameLabel.text = editToolList[indexPath.row]
-        if indexPath.row != 1 {
-            cell.valueLabel.text = "\(editToolValueList[indexPath.row] > 0 ? "+" : "")\(editToolValueList[indexPath.row])"
-        } else {
-            cell.valueLabel.text = "\(editToolValueList[indexPath.row])"
-        }
-        
+//        cell.nameLabel.text = EditTabController.editToolList[indexPath.row].name
+//            cell.valueLabel.text = "\(EditTabController.editToolList[indexPath.row].value > 0 ? "+" : "")\(EditTabController.editToolList[indexPath.row].value)"
+        cell.editTool = EditTabController.editToolList[indexPath.row]
         return cell
     }
 }

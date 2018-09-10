@@ -23,8 +23,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axp-VX-ui7" customClass="RenderView" customModule="GPUImage">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="728"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WOj-W0-9SM">
+                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WOj-W0-9SM">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="728"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -813,7 +814,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0HG-Ea-z1x" userLabel="Select View">
                                         <rect key="frame" x="62.666666666666657" y="339.66666666666669" width="249.99999999999997" height="55"/>
                                         <subviews>
-                                            <view alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpC-C4-bv0" customClass="GradientViewPink" customModule="Neonsight" customModuleProvider="target">
+                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpC-C4-bv0" customClass="GradientViewPink" customModule="Neonsight" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="-0.66666666666668561" width="250" height="55"/>
                                                 <color key="backgroundColor" name="neonPink"/>
                                             </view>
@@ -842,7 +843,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.070748730964466988" green="0.070748730964466988" blue="0.070748730964466988" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.089724777918781751" green="0.089724777918781751" blue="0.089724777918781751" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="3FX-9R-Aas"/>
                                             <constraint firstAttribute="height" constant="55" id="4Cb-Et-XmW"/>

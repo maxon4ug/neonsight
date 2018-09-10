@@ -62,7 +62,7 @@ extension ViewController : AVCaptureVideoDataOutputSampleBufferDelegate {
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             importImage = pickedImage
@@ -87,8 +87,10 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        CameraController.camera.startCapture()
+    @objc func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        cameraImageView.fadeTransition(0.2)
+        cameraImageView.alpha = 0.0
+        CameraController.camera.stopCapture()
         dismiss(animated: true, completion:nil)
     }
     

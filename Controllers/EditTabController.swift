@@ -28,7 +28,6 @@ class EditTabController {
     static var lastX: CGFloat!
     static var setX = UIScreen.main.bounds.width / 2.0
     static var changeValue: Int!
-    static var setValue = 0
     
     //doubletap
     static var tapTime = Date(timeIntervalSince1970: 0)
@@ -36,9 +35,19 @@ class EditTabController {
     static let step = (UIScreen.main.bounds.width / 2.0) / 70.0
     static var selectedEditToolNum = 0
     static var newSelectedEditToolNum = 0
-    static var editName = "ExposuRe"
-    static let maxValue = 100
-    static let minValue = -100
+    
+    static let editToolList = [
+        EditTool(name: "Exposure", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "Contrast", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "Brightness", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "Details", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "Contrast", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "Brightness", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "Details", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "Contrast", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "Brightness", value: 0, maxValue: 100, minValue: -100),
+        EditTool(name: "empty", value: 0, maxValue: 0, minValue: 0)
+    ]
     
     
     // MARK: - Methods
@@ -89,20 +98,20 @@ class EditTabController {
             } else if gestureDemention == 1 {
                 //horizontal
                 let shift = (location.x - startX)
-                changeValue = getChangeValue(shift: shift, maxValue: maxValue, minValue: minValue)
-                var currentValue = changeValue + setValue
-                if currentValue >= maxValue {
-                    currentValue = maxValue
+                changeValue = getChangeValue(shift: shift)
+                var currentValue = changeValue + Int(editToolList[selectedEditToolNum].value)
+                if currentValue >= Int(editToolList[newSelectedEditToolNum].maxValue) {
+                    currentValue = Int(editToolList[newSelectedEditToolNum].maxValue)
                     changeValue = 0
-                    setValue = maxValue
+                    editToolList[selectedEditToolNum].value = editToolList[newSelectedEditToolNum].maxValue
                     if location.x > lastX {
                         lastX = location.x
                         startX = location.x
                     }
-                } else if currentValue <= minValue {
-                    currentValue = minValue
+                } else if currentValue <= Int(editToolList[newSelectedEditToolNum].minValue) {
+                    currentValue = Int(editToolList[newSelectedEditToolNum].minValue)
                     changeValue = 0
-                    setValue = minValue
+                    editToolList[selectedEditToolNum].value = editToolList[newSelectedEditToolNum].minValue
                     if location.x < lastX {
                         lastX = location.x
                         startX = location.x
@@ -120,7 +129,7 @@ class EditTabController {
                 } else if editPanelListViewCurrentPosition < minY {
                     editPanelListViewCurrentPosition = minY
                     startY = location.y
-                    selectedEditToolNum = viewController.editToolList.count - 2
+                    selectedEditToolNum = editToolList.count - 3
                 }
                 updateEditPanelPosition(y: editPanelListViewCurrentPosition)
                 updateSelectedCell()
@@ -128,20 +137,19 @@ class EditTabController {
         }
         else {
             if gestureDemention == 1 {
-                let currentValue = changeValue + setValue
-                if currentValue >= maxValue {
-                    setValue = maxValue
-                } else if currentValue <= minValue {
-                    setValue = minValue
+                let currentValue = changeValue + Int(editToolList[selectedEditToolNum].value)
+                if currentValue >= Int(editToolList[newSelectedEditToolNum].maxValue) {
+                    editToolList[selectedEditToolNum].value = editToolList[newSelectedEditToolNum].maxValue
+                } else if currentValue <= Int(editToolList[newSelectedEditToolNum].minValue) {
+                    editToolList[selectedEditToolNum].value = editToolList[newSelectedEditToolNum].minValue
                 } else {
-                    setValue = currentValue
+                    editToolList[selectedEditToolNum].value = Double(currentValue)
                 }
-                viewController.editToolValueList[selectedEditToolNum] = Double(setValue)
                 //
                 updateEditPanelSelectView()
             } else if gestureDemention == 2 {
                 //vertical
-                selectedEditToolNum = newSelectedEditToolNum
+                setSelectedEditTool(num: newSelectedEditToolNum)
                 UIView.animate(withDuration: 0.2) {
                     viewController.editNabBarView.alpha = 1.0
                 }
@@ -150,9 +158,7 @@ class EditTabController {
                 }
             } else {
                 if Date().timeIntervalSince(tapTime) <= 0.3  {
-                    let defaultValue = viewController.editToolDefaultValueList[selectedEditToolNum]
-                    setValue = Int(defaultValue)
-                    viewController.editToolValueList[selectedEditToolNum] = defaultValue
+                    editToolList[selectedEditToolNum].clearValue()
                     updateEditNavBarValue()
                 }
                 tapTime = Date()
@@ -163,19 +169,19 @@ class EditTabController {
     }
     
     //
-    class func getChangeValue(shift: CGFloat, maxValue: Int, minValue: Int) -> Int {
+    class func getChangeValue(shift: CGFloat) -> Int {
         let percentage = (shift / step)
-        let value = CGFloat(maxValue) / 100 * percentage
+        let value = CGFloat(editToolList[newSelectedEditToolNum].maxValue / 100.0) * percentage
         return Int(value)
     }
     
     //
-    class func updateEditNavBarValue(newValue: Int = setValue) {
+    class func updateEditNavBarValue(newValue: Int = Int(editToolList[selectedEditToolNum].value)) {
         viewController.editNavBarLabel.fadeTransition(0.1)
         if selectedEditToolNum != 1 {
-            viewController.editNavBarLabel.text = "\(newValue > 0 ? editName + " +" : editName + " ")\(newValue)"
+            viewController.editNavBarLabel.text = "\(newValue > 0 ? editToolList[selectedEditToolNum].name + " +" : editToolList[selectedEditToolNum].name + " ")\(newValue)"
         } else {
-            viewController.editNavBarLabel.text = "\(editName) \(newValue)"
+            viewController.editNavBarLabel.text = "\(editToolList[selectedEditToolNum].name) \(newValue)"
         }
         updateValueGradientView(newValue: newValue)
     }
@@ -192,20 +198,18 @@ class EditTabController {
             let cellPosition = viewController.editPanelTableView.convert(cell.layer.position, to: viewController.view)
             if cellPosition.y <= (UIScreen.main.bounds.height / 2.0 + cellSize / 2.0) && cellPosition.y >= (UIScreen.main.bounds.height / 2.0 - cellSize / 2.0) {
                 guard currentCell != cellIndexPath.row else { return }
-                setSelectedEditTool(num: cellIndexPath.row)
+                setSelectedEditTool(num: cellIndexPath.row, asNew: true)
             }
         }
     }
     
     //
-    class func setSelectedEditTool(num: Int) {
-        newSelectedEditToolNum = num
-        setValue = Int(viewController.editToolValueList[num])
-        editName = viewController.editToolList[num]
+    class func setSelectedEditTool(num: Int, asNew: Bool = false) {
         currentCell = num
+        newSelectedEditToolNum = num
         updateEditPanelSelectView()
-        //        maxValue =
-        //        minValue
+        guard asNew == false else { return }
+        selectedEditToolNum = num
         updateEditNavBarValue()
     }
     
@@ -213,17 +217,17 @@ class EditTabController {
     class func updateEditPanelSelectView() {
         viewController.editPanelSelectNameLabel.fadeTransition(0.15)
         viewController.editPanelSelectValueLabel.fadeTransition(0.15)
-        viewController.editPanelSelectNameLabel.text = viewController.editToolList[newSelectedEditToolNum]
+        viewController.editPanelSelectNameLabel.text = editToolList[newSelectedEditToolNum].name
         if newSelectedEditToolNum != 1 {
-            viewController.editPanelSelectValueLabel.text = "\(setValue > 0 ? "+" : "")\(setValue)"
+            viewController.editPanelSelectValueLabel.text = "\(editToolList[newSelectedEditToolNum].value > 0 ? "+" : "")\(editToolList[newSelectedEditToolNum].value)"
         } else {
-            viewController.editPanelSelectValueLabel.text = "\(setValue)"
+            viewController.editPanelSelectValueLabel.text = "\(editToolList[newSelectedEditToolNum].value)"
         }
     }
     
     //
-    class func updateValueGradientView(newValue: Int = setValue) {
-        let percentage = CGFloat(newValue) / CGFloat(maxValue)
+    class func updateValueGradientView(newValue: Int = Int(editToolList[selectedEditToolNum].value)) {
+        let percentage = CGFloat(newValue) / CGFloat(editToolList[newSelectedEditToolNum].maxValue)
         viewController.editNavBarValueGradientMaskView.frame = CGRect(x: UIScreen.main.bounds.width / 2.0, y: 0, width: UIScreen.main.bounds.width / 2.0 * percentage, height: viewController.editNavBarValueGradientMaskView.frame.height)
         viewController.editNavBarValueGradientView.layer.mask = viewController.editNavBarValueGradientMaskView.layer
     }

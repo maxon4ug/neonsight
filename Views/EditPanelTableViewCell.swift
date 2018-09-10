@@ -10,15 +10,20 @@ import UIKit
 
 class EditPanelTableViewCell: UITableViewCell {
 
+    public var editTool: EditTool! {
+        didSet{
+            nameLabel.text = editTool.name
+            valueLabel.text = "\(editTool.value)"
+        }
+    }
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        if nameLabel.text == "" {
-            valueLabel.text = ""
-        }
+//        nameLabel.text = editTool.name
+//        valueLabel.text = "\(editTool.value)"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

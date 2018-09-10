@@ -157,7 +157,9 @@ class UIController {
     
     //
     class func clearEditTab() {
-        viewController.editToolValueList = viewController.editToolDefaultValueList
+        for editTool in EditTabController.editToolList {
+            editTool.clearValue()
+        }
         EditTabController.selectedEditToolNum = 0
         EditTabController.setSelectedEditTool(num: 0)
         EditTabController.updateEditPanelPosition()
