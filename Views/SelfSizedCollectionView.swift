@@ -1,14 +1,14 @@
 //
-//  SelfSizedTableView.swift
+//  SelfSizedCollectionView.swift
 //  Neonsight
 //
-//  Created by Max Surgai on 07.09.2018.
+//  Created by Max Surgai on 10.09.2018.
 //  Copyright © 2018 Max Surgai. All rights reserved.
 //
 
 import UIKit
 
-class SelfSizedTableView: UITableView {
+class SelfSizedCollectionView: UICollectionView {
     
     override func reloadData() {
         super.reloadData()

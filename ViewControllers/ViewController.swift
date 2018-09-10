@@ -10,8 +10,7 @@ import UIKit
 import AVFoundation
 import GPUImage
 
-class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, AVCapturePhotoCaptureDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource {
-    
+class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, AVCapturePhotoCaptureDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
     
     // MARK: - Properties
     
@@ -47,6 +46,9 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     // FILTERS PANEL
     @IBOutlet weak var filtersPanelView: UIView!
+    @IBOutlet weak var filtersCollectionView: UICollectionView!
+    
+    
     @IBOutlet weak var filtersScrollView: UIScrollView!
     @IBOutlet var filtersImageViewCollection: [UIImageView]!
     @IBOutlet var filtersNameLableCollection: [UILabel]!
@@ -155,9 +157,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         }
     }
     
-    
     // MARK: - TableView setup
-    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -170,10 +170,21 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "editCell", for: indexPath) as! EditPanelTableViewCell
-//        cell.nameLabel.text = EditTabController.editToolList[indexPath.row].name
-//            cell.valueLabel.text = "\(EditTabController.editToolList[indexPath.row].value > 0 ? "+" : "")\(EditTabController.editToolList[indexPath.row].value)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "editCell", for: indexPath) as! EditToolTableViewCell
         cell.editTool = EditTabController.editToolList[indexPath.row]
+        return cell
+    }
+    
+    // MARK: - CollectionView setup
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Filter.filterList.count
+    }
+    
+    //
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "filterCell", for: indexPath) as! FiltersCollectionViewCell
+        cell.filter = Filter.filterList[indexPath.row]
         return cell
     }
 }

@@ -194,7 +194,7 @@ class EditTabController {
     //
     class func updateSelectedCell() {
         for cellIndexPath in viewController.editPanelTableView.indexPathsForVisibleRows! {
-            let cell = viewController.editPanelTableView.cellForRow(at: cellIndexPath) as! EditPanelTableViewCell
+            let cell = viewController.editPanelTableView.cellForRow(at: cellIndexPath) as! EditToolTableViewCell
             let cellPosition = viewController.editPanelTableView.convert(cell.layer.position, to: viewController.view)
             if cellPosition.y <= (UIScreen.main.bounds.height / 2.0 + cellSize / 2.0) && cellPosition.y >= (UIScreen.main.bounds.height / 2.0 - cellSize / 2.0) {
                 guard currentCell != cellIndexPath.row else { return }

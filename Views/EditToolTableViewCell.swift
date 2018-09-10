@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditPanelTableViewCell: UITableViewCell {
+class EditToolTableViewCell: UITableViewCell {
 
     public var editTool: EditTool! {
         didSet{
@@ -21,9 +21,6 @@ class EditPanelTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-//        nameLabel.text = editTool.name
-//        valueLabel.text = "\(editTool.value)"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

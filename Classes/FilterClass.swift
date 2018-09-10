@@ -17,18 +17,48 @@ class Filter {
     let editToolSettings: [EditTool]
     
     
-    static let filterList: [Filter] = [
-        Filter(name: "1", image: nil, editToolSettings: [
+    static let filterList = [
+        Filter(name: "Sakura I", image: nil, editToolSettings: [
             EditTool(name: "Exposure", value: 33.0),
             EditTool(name: "Contrast", value: -3.0),
             EditTool(name: "Fade", value: 1.0)
             ]),
-        Filter(name: "2", image: nil, editToolSettings: [
+        Filter(name: "Sakura II", image: nil, editToolSettings: [
             EditTool(name: "Exposure", value: 33.0),
             EditTool(name: "Contrast", value: -3.0),
             EditTool(name: "Fade", value: 1.0)
             ]),
-        Filter(name: "3", image: nil, editToolSettings: [
+        Filter(name: "Sakura III", image: nil, editToolSettings: [
+            EditTool(name: "Exposure", value: 33.0),
+            EditTool(name: "Contrast", value: -3.0),
+            EditTool(name: "Fade", value: 1.0)
+            ]),
+        Filter(name: "Sakura IV", image: nil, editToolSettings: [
+            EditTool(name: "Exposure", value: 33.0),
+            EditTool(name: "Contrast", value: -3.0),
+            EditTool(name: "Fade", value: 1.0)
+            ]),
+        Filter(name: "Sakura V", image: nil, editToolSettings: [
+            EditTool(name: "Exposure", value: 33.0),
+            EditTool(name: "Contrast", value: -3.0),
+            EditTool(name: "Fade", value: 1.0)
+            ]),
+        Filter(name: "Sakura VI", image: nil, editToolSettings: [
+            EditTool(name: "Exposure", value: 33.0),
+            EditTool(name: "Contrast", value: -3.0),
+            EditTool(name: "Fade", value: 1.0)
+            ]),
+        Filter(name: "Sakura VII", image: nil, editToolSettings: [
+            EditTool(name: "Exposure", value: 33.0),
+            EditTool(name: "Contrast", value: -3.0),
+            EditTool(name: "Fade", value: 1.0)
+            ]),
+        Filter(name: "Sakura VIII", image: nil, editToolSettings: [
+            EditTool(name: "Exposure", value: 33.0),
+            EditTool(name: "Contrast", value: -3.0),
+            EditTool(name: "Fade", value: 1.0)
+            ]),
+        Filter(name: "Sakura IX", image: nil, editToolSettings: [
             EditTool(name: "Exposure", value: 33.0),
             EditTool(name: "Contrast", value: -3.0),
             EditTool(name: "Fade", value: 1.0)

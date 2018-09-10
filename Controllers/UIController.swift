@@ -15,8 +15,13 @@ class UIController {
     static var viewController: ViewController!
     static var activeTab = 1
     static var lightningMode = 0
-    static var lightningModesList = ["lightningOff","lightningA","lightning","lightningT"]
-    
+    static var lightningModesList = [
+        "lightningOff",
+        "lightningA",
+        "lightning",
+        "lightningT"
+    ]
+    static var tapTime = Date(timeIntervalSince1970: 0)
     
     // MARK: - Methods
     
@@ -54,6 +59,8 @@ class UIController {
     
     //
     class func switchTab(to tabNum: UInt) {
+        guard Date().timeIntervalSince(tapTime) > 0.21 else { return }
+        tapTime = Date()
         switch tabNum {
         case 1:
             if UIController.activeTab == 0 {
