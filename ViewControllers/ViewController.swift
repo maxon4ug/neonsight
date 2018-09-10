@@ -14,9 +14,6 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     // MARK: - Properties
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
     
     var importImage: UIImage!
     let imagePicker = UIImagePickerController()

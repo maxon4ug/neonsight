@@ -35,3 +35,17 @@ class GradientViewPink: UIView {
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
     }
 }
+
+class GradientViewBlack: UIView {
+    override open class var layerClass: AnyClass {
+        return CAGradientLayer.classForCoder()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        let gradientLayer = layer as! CAGradientLayer
+        gradientLayer.colors = [UIColor.darkGray.cgColor, UIColor.black.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+    }
+}

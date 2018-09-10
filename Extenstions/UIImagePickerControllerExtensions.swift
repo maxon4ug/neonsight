@@ -8,12 +8,3 @@
 
 import UIKit
 
-extension UIImagePickerController {
-    open override var childViewControllerForStatusBarHidden: UIViewController? {
-        return nil
-    }
-    
-    open override var prefersStatusBarHidden: Bool {
-        return true
-    }
-}
