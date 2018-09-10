@@ -22,15 +22,18 @@ class UIController {
     
     class func setupUI(sender: ViewController) {
         UIController.viewController = sender
-
+        setupCornerRadius()
+        EditTabController.setupGestureRecognizer(sender: sender)
+        setupImagePicker()
+    }
+    
+    
+    //
+    class func setupCornerRadius() {
         UIController.viewController.editNavBarLabelBGView.layer.cornerRadius = UIController.viewController.editNavBarLabelBGView.frame.height / 2.0
         UIController.viewController.galleryPanelView.subviews.first!.layer.cornerRadius = UIController.viewController.galleryPanelView.frame.height / 2.0
         UIController.viewController.lightningPanelView.subviews.first!.layer.cornerRadius = UIController.viewController.lightningPanelView.frame.height / 2.0
-        EditTabController.setupGestureRecognizer(sender: sender)
-        
-        sender.imagePicker.delegate = sender
     }
-    
     
     //
     class func moveView(view: UIView, x: CGFloat, y: CGFloat, isHidden: Bool, completion: @escaping () -> () = {}) {
@@ -152,9 +155,23 @@ class UIController {
         clearEditTab()
     }
     
+    //
     class func clearEditTab() {
         viewController.editToolValueList = viewController.editToolDefaultValueList
+        EditTabController.selectedEditToolNum = 0
         EditTabController.setSelectedEditTool(num: 0)
+        EditTabController.updateEditPanelPosition()
         viewController.editPanelTableView.reloadData()
+    }
+    
+    //
+    class func setupImagePicker() {
+        viewController.imagePicker.delegate = viewController
+        viewController.imagePicker.navigationBar.alpha = 0.8
+        viewController.imagePicker.navigationBar.barTintColor = .black
+        viewController.imagePicker.navigationBar.tintColor = .white
+        viewController.imagePicker.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.foregroundColor : UIColor.white
+        ]
     }
 }

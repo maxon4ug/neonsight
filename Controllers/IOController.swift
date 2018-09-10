@@ -35,11 +35,9 @@ class IOController {
     class func importImage(sender: ViewController) {
         sender.imagePicker.allowsEditing = false
         sender.imagePicker.sourceType = .photoLibrary
-        /*
-         UIImagePickerControllerSourceType.PhotoLibrary
-         UIImagePickerControllerSourceType.Camera
-         UIImagePickerControllerSourceType.SavedPhotosAlbum
-         */
+//         UIImagePickerControllerSourceType.PhotoLibrary
+//         UIImagePickerControllerSourceType.Camera
+//         UIImagePickerControllerSourceType.SavedPhotosAlbum
         sender.present(sender.imagePicker, animated: true, completion: nil)
     }
     

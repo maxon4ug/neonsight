@@ -26,13 +26,14 @@ class EditTabController {
     //horizontal
     static var startX: CGFloat!
     static var lastX: CGFloat!
+    static var setX = UIScreen.main.bounds.width / 2.0
     static var changeValue: Int!
     static var setValue = 0
     
     //doubletap
     static var tapTime = Date(timeIntervalSince1970: 0)
     
-    static let step = (UIScreen.main.bounds.width / 2.0) / 80.0
+    static let step = (UIScreen.main.bounds.width / 2.0) / 70.0
     static var selectedEditToolNum = 0
     static var newSelectedEditToolNum = 0
     static var editName = "ExposuRe"
@@ -180,7 +181,7 @@ class EditTabController {
     }
     
     //
-    class func updateEditPanelPosition(y: CGFloat) {
+    class func updateEditPanelPosition(y: CGFloat = maxY) {
         viewController.editPanelListView.frame = CGRect(x: (UIScreen.main.bounds.width - viewController.editPanelListView.frame.width) / 2.0, y: y, width: viewController.editPanelListView.frame.width, height: viewController.editPanelListView.frame.height)
     }
     
@@ -210,8 +211,8 @@ class EditTabController {
     
     //
     class func updateEditPanelSelectView() {
-        viewController.editPanelSelectNameLabel.fadeTransition(0.2)
-        viewController.editPanelSelectValueLabel.fadeTransition(0.2)
+        viewController.editPanelSelectNameLabel.fadeTransition(0.15)
+        viewController.editPanelSelectValueLabel.fadeTransition(0.15)
         viewController.editPanelSelectNameLabel.text = viewController.editToolList[newSelectedEditToolNum]
         if newSelectedEditToolNum != 1 {
             viewController.editPanelSelectValueLabel.text = "\(setValue > 0 ? "+" : "")\(setValue)"
