@@ -18,12 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#neonsight" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofa-QM-KJA">
-                                <rect key="frame" x="134.5" y="595" width="106.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Symbol" family="Symbol" pointSize="22"/>
-                                <color key="textColor" red="0.98003251899999999" green="0.98003251899999999" blue="0.98003251899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="aaY-WM-FDp">
                                 <rect key="frame" x="97" y="170" width="180" height="120"/>
                                 <constraints>
@@ -31,12 +25,26 @@
                                     <constraint firstAttribute="height" constant="120" id="ubJ-MY-vUU"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGt-hF-iPc">
+                                <rect key="frame" x="133.5" y="582.5" width="13" height="27"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="19"/>
+                                <color key="textColor" red="0.98003251899999999" green="0.98003251899999999" blue="0.98003251899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="neonsight" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofa-QM-KJA">
+                                <rect key="frame" x="146.5" y="581" width="92.5" height="26"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
+                                <color key="textColor" red="0.98003251899999999" green="0.98003251899999999" blue="0.98003251899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ofa-QM-KJA" secondAttribute="bottom" constant="50" id="BOP-qv-ekp"/>
-                            <constraint firstItem="ofa-QM-KJA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="E1z-2P-42x"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ofa-QM-KJA" secondAttribute="bottom" constant="60" id="8lf-fr-YHm"/>
+                            <constraint firstItem="EGt-hF-iPc" firstAttribute="baseline" secondItem="ofa-QM-KJA" secondAttribute="baseline" id="Y8T-Hf-5xG"/>
                             <constraint firstItem="aaY-WM-FDp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="bqr-qx-eJi"/>
+                            <constraint firstItem="ofa-QM-KJA" firstAttribute="leading" secondItem="EGt-hF-iPc" secondAttribute="trailing" id="qN2-GV-Q0A"/>
+                            <constraint firstItem="ofa-QM-KJA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" constant="5" id="ua1-sY-z0h"/>
                             <constraint firstItem="aaY-WM-FDp" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ueF-Nt-wki"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
