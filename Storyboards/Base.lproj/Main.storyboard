@@ -216,10 +216,18 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1p-o7-7Vd">
+                                                            <rect key="frame" x="0.0" y="0.0" width="65" height="88"/>
+                                                            <connections>
+                                                                <action selector="filterButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="51N-Ec-rI8"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                 </view>
                                                 <constraints>
                                                     <constraint firstItem="SMl-dq-q6r" firstAttribute="leading" secondItem="7KM-Ue-CcO" secondAttribute="leading" id="0ux-7N-HbN"/>
+                                                    <constraint firstItem="e1p-o7-7Vd" firstAttribute="top" secondItem="7KM-Ue-CcO" secondAttribute="top" id="3yW-Xi-CkN"/>
+                                                    <constraint firstAttribute="trailing" secondItem="e1p-o7-7Vd" secondAttribute="trailing" id="A7F-Hv-uEO"/>
                                                     <constraint firstItem="bKx-LW-HBe" firstAttribute="top" secondItem="SMl-dq-q6r" secondAttribute="bottom" constant="6" id="D5u-Sx-NbT"/>
                                                     <constraint firstItem="WsT-xW-yjz" firstAttribute="top" secondItem="7KM-Ue-CcO" secondAttribute="top" id="L2l-ga-hS9"/>
                                                     <constraint firstAttribute="bottom" secondItem="WsT-xW-yjz" secondAttribute="bottom" id="Vnz-6j-0Nc"/>
@@ -228,9 +236,12 @@
                                                     <constraint firstItem="bKx-LW-HBe" firstAttribute="centerX" secondItem="7KM-Ue-CcO" secondAttribute="centerX" id="lR7-8C-8Re"/>
                                                     <constraint firstAttribute="trailing" secondItem="WsT-xW-yjz" secondAttribute="trailing" id="sDU-Tw-myl"/>
                                                     <constraint firstAttribute="trailing" secondItem="SMl-dq-q6r" secondAttribute="trailing" id="tC5-Me-Ekl"/>
+                                                    <constraint firstAttribute="bottom" secondItem="e1p-o7-7Vd" secondAttribute="bottom" id="tV2-M3-nLs"/>
+                                                    <constraint firstItem="e1p-o7-7Vd" firstAttribute="leading" secondItem="7KM-Ue-CcO" secondAttribute="leading" id="v3R-Xc-Ohh"/>
                                                 </constraints>
                                                 <size key="customSize" width="65" height="88"/>
                                                 <connections>
+                                                    <outlet property="button" destination="e1p-o7-7Vd" id="Plc-Ci-LYH"/>
                                                     <outlet property="imageView" destination="SMl-dq-q6r" id="Lew-Lr-Vkz"/>
                                                     <outlet property="nameLabel" destination="bKx-LW-HBe" id="zjG-pl-xah"/>
                                                 </connections>

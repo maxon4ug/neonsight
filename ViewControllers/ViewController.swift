@@ -45,12 +45,6 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     @IBOutlet weak var filtersPanelView: UIView!
     @IBOutlet weak var filtersCollectionView: UICollectionView!
     
-    
-    @IBOutlet weak var filtersScrollView: UIScrollView!
-    @IBOutlet var filtersImageViewCollection: [UIImageView]!
-    @IBOutlet var filtersNameLableCollection: [UILabel]!
-    @IBOutlet var filtersButtonCollection: [UIButton]!
-    
     // EDIT NAV BAR
     @IBOutlet weak var editNabBarView: UIView!
     @IBOutlet weak var editNavBarLabel: UILabel!
@@ -130,7 +124,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     @IBAction func galleryButtonTapped(_ sender: Any) { //close button
         cameraImageView.fadeTransition(0.2)
         if importImage != nil { //close
-            CameraController.camera.stopCapture()
+            CameraController.camera.startCapture()
             cameraImageView.image = nil
             importImage = nil
             UIController.switchToImportMode()
@@ -150,6 +144,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
             filter.saturation = 0.1
             CameraController.camera --> filter
         default:
+            print(sender.tag)
             break
         }
     }
@@ -182,6 +177,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "filterCell", for: indexPath) as! FiltersCollectionViewCell
         cell.filter = Filter.filterList[indexPath.row]
+        cell.button.tag = indexPath.row
         return cell
     }
 }
