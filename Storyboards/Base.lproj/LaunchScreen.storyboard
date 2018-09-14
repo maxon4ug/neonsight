@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="aaY-WM-FDp">
-                                <rect key="frame" x="97" y="170" width="180" height="120"/>
+                                <rect key="frame" x="97" y="155" width="180" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="4Y7-H5-qB3"/>
                                     <constraint firstAttribute="height" constant="120" id="ubJ-MY-vUU"/>
@@ -42,7 +42,7 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ofa-QM-KJA" secondAttribute="bottom" constant="60" id="8lf-fr-YHm"/>
                             <constraint firstItem="EGt-hF-iPc" firstAttribute="baseline" secondItem="ofa-QM-KJA" secondAttribute="baseline" id="Y8T-Hf-5xG"/>
-                            <constraint firstItem="aaY-WM-FDp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="bqr-qx-eJi"/>
+                            <constraint firstItem="aaY-WM-FDp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="135" id="bqr-qx-eJi"/>
                             <constraint firstItem="ofa-QM-KJA" firstAttribute="leading" secondItem="EGt-hF-iPc" secondAttribute="trailing" id="qN2-GV-Q0A"/>
                             <constraint firstItem="ofa-QM-KJA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" constant="5" id="ua1-sY-z0h"/>
                             <constraint firstItem="aaY-WM-FDp" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ueF-Nt-wki"/>
@@ -58,6 +58,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="181" height="121"/>
+        <image name="logo" width="180" height="132"/>
     </resources>
 </document>
